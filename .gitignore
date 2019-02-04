@@ -1,0 +1,6 @@
+**node_modules/
+**build/
+**dist/
+**.stackdump
+**.tgz
+lerna-debug.log

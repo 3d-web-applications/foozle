@@ -1,0 +1,12 @@
+module.exports = {
+  presets: [
+    [
+      '@babel/env',
+      {
+        targets: {
+          browsers: ['last 2 versions', 'safari >= 7'],
+        },
+      },
+    ],
+  ],
+};

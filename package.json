@@ -1,0 +1,9 @@
+{
+  "name": "root",
+  "private": true,
+  "author": "Lars Wobus",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^3.10.7"
+  }
+}

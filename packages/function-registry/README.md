@@ -3,7 +3,7 @@
 Simple mechanism to execute multiple functions at once.
 
 ```javascript
-import { createRegistry } from './create-registry';
+import { createRegistry } from '@foozle/function-registry';
 
 const fn = () => {};
 

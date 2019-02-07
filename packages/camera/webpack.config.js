@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [],
   context: __dirname,
-  entry: 'main.js',
+  entry: './main.js',
   output: {
     filename: 'cameras.js',
     path: `${__dirname}/dist`,

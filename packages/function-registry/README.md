@@ -1,4 +1,4 @@
-# Function-Registry
+# Orbit-Camera
 
 Simple mechanism to execute multiple functions at once.
 

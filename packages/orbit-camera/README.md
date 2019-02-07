@@ -1,4 +1,4 @@
-# Function-Registry
+# Orbit-Camera
 
 The package contains modified versions of some standard PlayCanvas scripts. To see the original versions, create a new PlayCanvas project and select the Model Viewer Starter Kit.
 

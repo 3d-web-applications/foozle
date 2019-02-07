@@ -3,7 +3,7 @@ module.exports = {
   context: __dirname,
   entry: './main.js',
   output: {
-    filename: 'cameras.js',
+    filename: 'orbit-camera.js',
     path: `${__dirname}/dist`,
   },
   module: {

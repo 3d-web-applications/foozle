@@ -1,4 +1,4 @@
-const { attributes, prototype } = pc.createScript('touchInput');
+const { attributes, prototype } = pc.createScript('OrbitCameraTouchInput');
 
 attributes.add('orbitSensitivity', {
   type: 'number',
@@ -15,14 +15,14 @@ attributes.add('distanceSensitivity', {
 });
 
 prototype.initialize = function () {
-  this.orbitCamera = this.entity.script.orbitCamera;
+  this.OrbitCamera = this.entity.script.OrbitCamera;
 
   // Store the position of the touch so we can calculate the distance moved
   this.lastTouchPoint = new pc.Vec2();
   this.lastPinchMidPoint = new pc.Vec2();
   this.lastPinchDistance = 0;
 
-  if (this.orbitCamera && this.app.touch) {
+  if (this.OrbitCamera && this.app.touch) {
     // Use the same callback for the touchStart, touchEnd and touchCancel events as they
     // all do the same thing which is to deal the possible multiple touches to the screen
     this.app.touch.on(pc.EVENT_TOUCHSTART, this.onTouchStartEndCancel, this);
@@ -82,7 +82,7 @@ prototype.pan = function (midPoint) {
   // For panning to work at any zoom level, we use screen point to world projection
   // to work out how far we need to pan the pivotEntity in world space
   const { camera } = this.entity;
-  const { distance } = this.orbitCamera;
+  const { distance } = this.OrbitCamera;
 
   camera.screenToWorld(midPoint.x, midPoint.y, distance, fromWorldPoint);
   camera.screenToWorld(
@@ -91,7 +91,7 @@ prototype.pan = function (midPoint) {
 
   worldDiff.sub2(toWorldPoint, fromWorldPoint);
 
-  this.orbitCamera.pivotPoint.add(worldDiff);
+  this.OrbitCamera.pivotPoint.add(worldDiff);
 };
 
 let pinchMidPoint = new pc.Vec2();
@@ -103,9 +103,9 @@ prototype.onTouchMove = function (event) {
   if (touches.length === 1) {
     const touch = touches[0];
 
-    this.orbitCamera.pitch
+    this.OrbitCamera.pitch
       -= (touch.y - this.lastTouchPoint.y) * this.orbitSensitivity;
-    this.orbitCamera.yaw
+    this.OrbitCamera.yaw
       -= (touch.x - this.lastTouchPoint.x) * this.orbitSensitivity;
 
     this.lastTouchPoint.set(touch.x, touch.y);
@@ -115,9 +115,9 @@ prototype.onTouchMove = function (event) {
     const diffInPinchDistance = currentPinchDistance - this.lastPinchDistance;
     this.lastPinchDistance = currentPinchDistance;
 
-    this.orbitCamera.distance
+    this.OrbitCamera.distance
       -= (diffInPinchDistance * this.distanceSensitivity * 0.1)
-      * (this.orbitCamera.distance * 0.1);
+      * (this.OrbitCamera.distance * 0.1);
 
     // Calculate pan difference
     pinchMidPoint = this.calcMidPoint(touches[0], touches[1], pinchMidPoint);

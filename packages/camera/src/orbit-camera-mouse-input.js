@@ -1,4 +1,4 @@
-const { attributes, prototype } = pc.createScript('mouseInput');
+const { attributes, prototype } = pc.createScript('OrbitCameraMouseInput');
 
 attributes.add('orbitSensitivity', {
   type: 'number',
@@ -15,9 +15,9 @@ attributes.add('distanceSensitivity', {
 });
 
 prototype.initialize = function () {
-  this.orbitCamera = this.entity.script.orbitCamera;
+  this.OrbitCamera = this.entity.script.OrbitCamera;
 
-  if (this.orbitCamera) {
+  if (this.OrbitCamera) {
     const self = this;
 
     const onMouseOut = function (e) {
@@ -60,7 +60,7 @@ prototype.pan = function (screenPoint) {
   // For panning to work at any zoom level, we use screen point to world projection
   // to work out how far we need to pan the pivotEntity in world space
   const { camera } = this.entity;
-  const { distance } = this.orbitCamera;
+  const { distance } = this.OrbitCamera;
 
   camera.screenToWorld(screenPoint.x, screenPoint.y, distance, fromWorldPoint);
   camera.screenToWorld(
@@ -69,7 +69,7 @@ prototype.pan = function (screenPoint) {
 
   worldDiff.sub2(toWorldPoint, fromWorldPoint);
 
-  this.orbitCamera.pivotPoint.add(worldDiff);
+  this.OrbitCamera.pivotPoint.add(worldDiff);
 };
 
 prototype.onMouseDown = function (event) {
@@ -102,8 +102,8 @@ prototype.onMouseUp = function (event) {
 
 prototype.onMouseMove = function (event) {
   if (this.lookButtonDown) {
-    this.orbitCamera.pitch -= event.dy * this.orbitSensitivity;
-    this.orbitCamera.yaw -= event.dx * this.orbitSensitivity;
+    this.OrbitCamera.pitch -= event.dy * this.orbitSensitivity;
+    this.OrbitCamera.yaw -= event.dx * this.orbitSensitivity;
   } else if (this.panButtonDown) {
     this.pan(event);
   }
@@ -112,8 +112,8 @@ prototype.onMouseMove = function (event) {
 };
 
 prototype.onMouseWheel = function (event) {
-  this.orbitCamera.distance -= event.wheel
-    * this.distanceSensitivity * (this.orbitCamera.distance * 0.1);
+  this.OrbitCamera.distance -= event.wheel
+    * this.distanceSensitivity * (this.OrbitCamera.distance * 0.1);
   event.event.preventDefault();
 };
 

@@ -1,4 +1,4 @@
-const { attributes, prototype } = pc.createScript('orbitCamera');
+const { attributes, prototype } = pc.createScript('OrbitCamera');
 
 attributes.add('distanceMax', {
   type: 'number',

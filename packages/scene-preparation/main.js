@@ -9,12 +9,13 @@ const createEntityIncludingScripts = (entityName, scriptNames) => {
   return entity;
 };
 
-if (!window.foozle) window.foozle = { sceneConfig: {}, persistent: [] };
-if (!window.foozle.persistent) window.foozle.persistent = [];
+let { foozle } = window;
+if (!foozle) foozle = { sceneConfig: {} };
+if (!foozle.persistent) foozle.persistent = [];
 
-const { sceneConfig, persistent } = window.foozle;
+const { sceneConfig, persistent } = foozle;
 
-Object.entries(sceneConfig).forEach((entry) => {
+Object.entries(sceneConfig || {}).forEach((entry) => {
   const entity = createEntityIncludingScripts(entry[0], entry[1]);
   persistent.push(entity);
   // console.log(entity);

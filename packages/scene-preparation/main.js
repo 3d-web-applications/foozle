@@ -10,6 +10,8 @@ const reservedFn = {
   toolsUpdate: ComponentSystem._toolsUpdate,
 };
 
+const noop = () => {};
+
 if (app) {
   /* const selectArray = (functionName) => {
     switch (functionName) {
@@ -35,6 +37,7 @@ if (app) {
       // note: when using window.pc.ComponentSystem.bind instead, the function below would be called at last in the scene hierarchy
       // selectArray(functionName).unshift({ f: fn, s: scope });
       reservedFn[functionName].unshift({ f: fn, s: scope });
+      scope[functionName] = noop;
     }
   };
 
@@ -50,11 +53,17 @@ if (app) {
       const script = entity.script[scriptName];
 
       if (bindings.initialize === 'before') bind('initialize', script);
+      if (bindings.initialize === 'skip') script.initialize = noop;
       if (bindings.postInitialize === 'before') bind('postInitialize', script);
+      if (bindings.postInitialize === 'skip') script.postInitialize = noop;
       if (bindings.update === 'before') bind('update', script);
+      if (bindings.update === 'skip') script.update = noop;
       if (bindings.postUpdate === 'before') bind('postUpdate', script);
+      if (bindings.postUpdate === 'skip') script.postUpdate = noop;
       if (bindings.fixedUpdate === 'before') bind('fixedUpdate', script);
+      if (bindings.fixedUpdate === 'skip') script.fixedUpdate = noop;
       if (bindings.toolsUpdate === 'before') bind('toolsUpdate', script);
+      if (bindings.toolsUpdate === 'skip') script.toolsUpdate = noop;
       /* Object.keys(reservedFn).forEach((fnName) => {
         if (bindings[fnName]) bind(fnName, script);
       }); */
@@ -72,15 +81,20 @@ if (app) {
   app.onLibrariesLoaded = () => {
     (sceneConfig || []).forEach((element) => {
       const entity = createEntityIncludingScripts(element);
-      persistent.push(entity);
+      persistent.push({ entity, parent: element.parent });
     });
 
     onLibrariesLoaded();
   };
 
-  /* const start = app.start.bind(app);
+  const start = app.start.bind(app);
   app.start = () => {
     start();
-    pc.app.root.addChild(window.foozle.persistent[0]);
-  }; */
+    persistent.forEach((element) => {
+      if (element.parent === 'root') {
+        pc.app.root.addChild(element.entity);
+        // TODO remove from persistent
+      }
+    });
+  };
 }

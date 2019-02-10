@@ -13,31 +13,11 @@ const reservedFn = {
 const noop = () => {};
 
 if (app) {
-  /* const selectArray = (functionName) => {
-    switch (functionName) {
-      case 'initialize':
-        return ComponentSystem._init;
-      case 'postInitialize':
-        return ComponentSystem._postInit;
-      case 'update':
-        return ComponentSystem._update;
-      case 'postUpdate':
-        return ComponentSystem._postUpdate;
-      case 'fixedUpdate':
-        return ComponentSystem._fixedUpdate;
-      case 'toolsUpdate':
-        return ComponentSystem._toolsUpdate;
-      default: return [];
-    }
-  }; */
-
   const bind = (functionName, scope) => {
     const fn = scope[functionName];
     if (fn) {
       // note: when using window.pc.ComponentSystem.bind instead, the function below would be called at last in the scene hierarchy
-      // selectArray(functionName).unshift({ f: fn, s: scope });
       reservedFn[functionName].unshift({ f: fn, s: scope });
-      scope[functionName] = noop;
     }
   };
 
@@ -52,21 +32,14 @@ if (app) {
       entity.script.create(scriptName, { attributes });
       const script = entity.script[scriptName];
 
-      if (bindings.initialize === 'before') bind('initialize', script);
-      if (bindings.initialize === 'skip') script.initialize = noop;
-      if (bindings.postInitialize === 'before') bind('postInitialize', script);
-      if (bindings.postInitialize === 'skip') script.postInitialize = noop;
-      if (bindings.update === 'before') bind('update', script);
-      if (bindings.update === 'skip') script.update = noop;
-      if (bindings.postUpdate === 'before') bind('postUpdate', script);
-      if (bindings.postUpdate === 'skip') script.postUpdate = noop;
-      if (bindings.fixedUpdate === 'before') bind('fixedUpdate', script);
-      if (bindings.fixedUpdate === 'skip') script.fixedUpdate = noop;
-      if (bindings.toolsUpdate === 'before') bind('toolsUpdate', script);
-      if (bindings.toolsUpdate === 'skip') script.toolsUpdate = noop;
-      /* Object.keys(reservedFn).forEach((fnName) => {
-        if (bindings[fnName]) bind(fnName, script);
-      }); */
+      Object.keys(reservedFn).forEach((key) => {
+        if (bindings[key] === 'before') {
+          bind(key, script);
+          script[key] = noop;
+        } else if (bindings[key] === 'skip') {
+          script[key] = noop;
+        }
+      });
     });
     return entity;
   };

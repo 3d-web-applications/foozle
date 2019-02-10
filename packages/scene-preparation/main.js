@@ -13,11 +13,17 @@ const reservedFn = {
 const noop = () => {};
 
 if (app) {
-  const bind = (functionName, scope) => {
+  const bindBefore = (functionName, scope) => {
     const fn = scope[functionName];
     if (fn) {
-      // note: when using window.pc.ComponentSystem.bind instead, the function below would be called at last in the scene hierarchy
       reservedFn[functionName].unshift({ f: fn, s: scope });
+    }
+  };
+
+  const bindAfter = (functionName, scope) => {
+    const fn = scope[functionName];
+    if (fn) {
+      reservedFn[functionName].push({ f: fn, s: scope });
     }
   };
 
@@ -34,9 +40,12 @@ if (app) {
 
       Object.keys(reservedFn).forEach((key) => {
         if (bindings[key] === 'before') {
-          bind(key, script);
+          bindBefore(key, script);
           script[key] = noop;
         } else if (bindings[key] === 'skip') {
+          script[key] = noop;
+        } else if (bindings[key] === 'after') {
+          bindAfter(key, script);
           script[key] = noop;
         }
       });

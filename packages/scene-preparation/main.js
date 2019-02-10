@@ -6,9 +6,9 @@ if (app) {
     const entity = new window.pc.Entity();
     entity.name = config.name || 'Preliminary';
     entity.addComponent('script');
-    const array = config.script || [];
-    array.forEach((scriptName) => {
-      entity.script.create(scriptName, { attributes: { _entries: [] } });
+    const array = Object.entries(config.scripts || []);
+    array.forEach((entry) => {
+      entity.script.create(entry[0], { attributes: entry[1] });
     });
     return entity;
   };

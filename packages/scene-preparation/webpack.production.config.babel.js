@@ -1,9 +1,11 @@
+const folderName = __dirname.split(/[\\/]/).pop();
+
 module.exports = {
   plugins: [],
   context: __dirname,
   entry: './main.js',
   output: {
-    filename: 'everywhere.js',
+    filename: `${folderName}.js`,
     path: `${__dirname}/dist`,
   },
   module: {

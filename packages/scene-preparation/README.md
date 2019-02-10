@@ -71,3 +71,4 @@ If entities should be added to the scene hierarchy, functions would be executed 
 - It is not known if the scripts will still work when changing scenes
 - Entities added to the scene hierarchy might get lost during scene changes
 - Don't forget to mention attributes in your configuration to prevent errors.
+- At the moment entities can only be added as children to the root entity. If *parent* is not set to *root*, entites will not be added to the scene. 

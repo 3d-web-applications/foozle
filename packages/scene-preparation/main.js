@@ -1,11 +1,40 @@
 const { pc } = window;
+const { ComponentSystem } = pc;
 const { app } = pc.script;
+const reservedFn = {
+  initialize: ComponentSystem._init,
+  postInitialize: ComponentSystem._postInit,
+  update: ComponentSystem._update,
+  postUpdate: ComponentSystem._postUpdate,
+  fixedUpdate: ComponentSystem._fixedUpdate,
+  toolsUpdate: ComponentSystem._toolsUpdate,
+};
 
 if (app) {
-  const bind = (array, fn, scope) => {
+  /* const selectArray = (functionName) => {
+    switch (functionName) {
+      case 'initialize':
+        return ComponentSystem._init;
+      case 'postInitialize':
+        return ComponentSystem._postInit;
+      case 'update':
+        return ComponentSystem._update;
+      case 'postUpdate':
+        return ComponentSystem._postUpdate;
+      case 'fixedUpdate':
+        return ComponentSystem._fixedUpdate;
+      case 'toolsUpdate':
+        return ComponentSystem._toolsUpdate;
+      default: return [];
+    }
+  }; */
+
+  const bind = (functionName, scope) => {
+    const fn = scope[functionName];
     if (fn) {
       // note: when using window.pc.ComponentSystem.bind instead, the function below would be called at last in the scene hierarchy
-      array.unshift({ f: fn, s: scope });
+      // selectArray(functionName).unshift({ f: fn, s: scope });
+      reservedFn[functionName].unshift({ f: fn, s: scope });
     }
   };
 
@@ -16,20 +45,19 @@ if (app) {
     const array = Object.entries(config.scripts || []);
     array.forEach((entry) => {
       const scriptName = entry[0];
-      entity.script.create(scriptName, { attributes: entry[1] });
+      const { attributes, bindings } = entry[1];
+      entity.script.create(scriptName, { attributes });
       const script = entity.script[scriptName];
-      /* if (script.initialize) {
-        pc.ComponentSystem._init.unshift({
-          f: script.initialize,
-          s: script,
-        });
-      } */
-      bind(pc.ComponentSystem._init, script.initialize, script);
-      bind(pc.ComponentSystem._postInit, script.postInitialize, script);
-      bind(pc.ComponentSystem._update, script.update, script);
-      bind(pc.ComponentSystem._postUpdate, script.postUpdate, script);
-      bind(pc.ComponentSystem._fixedUpdate, script.fixedUpdate, script);
-      bind(pc.ComponentSystem._toolsUpdate, script.toolsUpdate, script);
+
+      if (bindings.initialize === 'before') bind('initialize', script);
+      if (bindings.postInitialize === 'before') bind('postInitialize', script);
+      if (bindings.update === 'before') bind('update', script);
+      if (bindings.postUpdate === 'before') bind('postUpdate', script);
+      if (bindings.fixedUpdate === 'before') bind('fixedUpdate', script);
+      if (bindings.toolsUpdate === 'before') bind('toolsUpdate', script);
+      /* Object.keys(reservedFn).forEach((fnName) => {
+        if (bindings[fnName]) bind(fnName, script);
+      }); */
     });
     return entity;
   };

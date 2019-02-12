@@ -1,2 +1,4 @@
 **.stackdump
 **test.js
+*
+!main.js

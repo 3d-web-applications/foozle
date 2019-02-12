@@ -1,4 +1,4 @@
 **.stackdump
 **test.js
 *
-!dist/*
+!main.js

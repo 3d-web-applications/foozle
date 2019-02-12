@@ -1,2 +1,4 @@
-**.stackdump
-**test.js
+*
+*.test.*
+!src/*
+!main.js

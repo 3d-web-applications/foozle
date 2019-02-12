@@ -4,7 +4,8 @@
   "author": "Lars Wobus",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "tarball": "lerna exec -- npm pack"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

@@ -1,0 +1,19 @@
+{
+  "name": "@foozle/collision-layers",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "development": "webpack --mode development --config webpack.development.config.babel.js",
+    "production": "webpack --mode production --config webpack.production.config.babel.js"
+  },
+  "keywords": [],
+  "author": "Lars Wobus",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  }
+}

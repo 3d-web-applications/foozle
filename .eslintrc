@@ -5,9 +5,16 @@
         "no-underscore-dangle": 0,
         "func-names": ["error", "never"],
         "no-bitwise": 0,
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "import/no-relative-parent-imports": "error",
+        "no-duplicate-imports": "error"
     },
-    "extends": ["airbnb-base"],
+    "extends": [
+      "airbnb-base",
+      "eslint:recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings"
+  ],
     "globals": {
       "pc": true,
       "window": true

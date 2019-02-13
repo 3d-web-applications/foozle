@@ -1,4 +1,4 @@
 *
-*.test.*
 !src/*
 !create-registry.js
+*.test.*

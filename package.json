@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "tarball": "lerna exec -- npm pack && lerna exec -- move *.tgz ../../../foozle-tarballs"
+    "tarball": "lerna exec -- npm pack && lerna exec -- move *.tgz ../../../foozle-tarballs",
+    "cleanup": "lerna clean --yes && lerna bootstrap",
+    "development": "lerna exec --no-bail -- npm run development",
+    "production": "lerna exec --no-bail -- npm run production"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

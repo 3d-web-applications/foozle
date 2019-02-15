@@ -9,6 +9,24 @@ This will make testing much easier.
 
 Loading custom scripts through that bundle will enable you to to persist objects between scene loads. It also allows you to mock up data from previously loaded scenes.
 
+## Investigation
+
+### Window
+
+Within the PlayCanvas Editor, the most simple approach to reach the proposed goal is to create a new Javascript file and placing it to the top of the *Scripts Loading Order*. It can contain global variables as well as functions, etc. To make them available, they could be bound to the *window* object.
+
+Advantages:
+- easy to implement
+- gives the appearance of reusability
+
+Disadvantages:
+- too many scripts could rely on the existence of specific properties at the *window* object
+- after a certain amount of time, multiple versions could exist in different projects
+- the tracking the amount of scripts, which extend the window object, as well as tracking the amount of reserved property names can become very frustrating
+- even if it is very unlikely, specific properties of the *window* object could be already in use
+
+At first glance, the solution seems to be good, but in the long run it will make testing and proper versioning much harder.
+
 ## Preparation
 
 Because the package is still in Early-Access, one has to bundle it up by themself.

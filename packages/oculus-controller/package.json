@@ -10,5 +10,8 @@
   },
   "keywords": [],
   "author": "Lars Wobus",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@foozle/function-registry": "^0.0.0"
+  }
 }

@@ -1,1 +1,2 @@
-console.log('hello world');
+import './src/gamepad-manager';
+import './src/vr-display';

@@ -27,23 +27,23 @@ prototype.initialize = function () {
 prototype.update = function () {
   const { XBox360Input } = this;
   this.state = {
-    leftBumperPressed: XBox360Input.leftBumperPressed(),
-    rightBumperPressed: XBox360Input.rightBumperPressed(),
-    leftTriggerPressed: XBox360Input.leftTriggerPressed(),
-    rightTriggerPressed: XBox360Input.rightTriggerPressed(),
     aButtonPressed: XBox360Input.aButtonPressed(),
     bButtonPressed: XBox360Input.bButtonPressed(),
     xButtonPressed: XBox360Input.xButtonPressed(),
     yButtonPressed: XBox360Input.yButtonPressed(),
-    startButtonPressed: XBox360Input.startButtonPressed(),
+    leftBumperPressed: XBox360Input.leftBumperPressed(),
+    rightBumperPressed: XBox360Input.rightBumperPressed(),
+    leftTriggerPressed: XBox360Input.leftTriggerPressed(),
+    rightTriggerPressed: XBox360Input.rightTriggerPressed(),
     backButtonPressed: XBox360Input.backButtonPressed(),
-    // guideButtonPressed: XBox360Input.guideButtonPressed(),
+    startButtonPressed: XBox360Input.startButtonPressed(),
     leftAnalogStickPressed: XBox360Input.leftAnalogStickPressed(),
     rightAnalogStickPressed: XBox360Input.rightAnalogStickPressed(),
     dPadUpPressed: XBox360Input.dPadUpPressed(),
+    dPadDownPressed: XBox360Input.dPadDownPressed(),
     dPadLeftPressed: XBox360Input.dPadLeftPressed(),
     dPadRightPressed: XBox360Input.dPadRightPressed(),
-    dPadDownPressed: XBox360Input.dPadDownPressed(),
+    // guideButtonPressed: XBox360Input.guideButtonPressed(),
     leftStickX: XBox360Input.leftStickX(),
     leftStickY: XBox360Input.leftStickY(),
     rightStickX: XBox360Input.rightStickX(),
@@ -54,4 +54,3 @@ prototype.update = function () {
 prototype._onStateChanged = function () {
   console.log(this._state);
 };
-

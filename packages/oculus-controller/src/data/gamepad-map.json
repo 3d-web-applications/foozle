@@ -1,0 +1,14 @@
+{
+  "axes": [
+    "PAD_L_STICK_X",
+    "PAD_L_STICK_Y"
+  ],
+  "buttons": [
+    "PAD_FACE_1",
+    "PAD_FACE_2",
+    "PAD_FACE_3",
+    "PAD_FACE_4",
+    "PAD_L_SHOULDER_1",
+    "inaccessible"
+  ]
+}

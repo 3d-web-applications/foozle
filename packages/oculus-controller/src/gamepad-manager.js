@@ -52,7 +52,7 @@ prototype.postInitialize = function() {
     function() {
       var pads = self._gamepads.poll();
       self._gamepads.update();
-      if (pads.length > 0) {
+      /*if (pads.length > 0) {
           console.log("PAD_FACE_1", self._gamepads.isPressed(pc.PAD_1, pc.PAD_FACE_1));
           console.log("PAD_FACE_2", self._gamepads.isPressed(pc.PAD_1, pc.PAD_FACE_2));
           console.log("PAD_FACE_3", self._gamepads.isPressed(pc.PAD_1, pc.PAD_FACE_3));
@@ -61,7 +61,7 @@ prototype.postInitialize = function() {
           //console.log("PAD_R_SHOULDER_1", self._gamepads.isPressed(pc.PAD_1, pc.PAD_R_SHOULDER_1));
           console.log("pc.PAD_L_STICK_X", self._gamepads.getAxis(pc.PAD_1, pc.PAD_L_STICK_X));
           console.log("pc.PAD_L_STICK_Y", self._gamepads.getAxis(pc.PAD_1, pc.PAD_L_STICK_Y));
-      }
+      }*/
     },
     3000);
 };
@@ -94,6 +94,10 @@ prototype.update = function (/* dt */) {
   const pads = this._gamepads.poll();
   this._gamepads.update();
   this._gamepadCount = pads.length;
+};
+
+prototype.getGamepads = function () {
+  return this._gamepads.poll();
 };
 
 /**

@@ -27,28 +27,100 @@ prototype.initialize = function () {
 };
 
 prototype.update = function () {
-  console.log(this.gamepad.pad.buttons[0].pressed);
+  // console.log(this.gamepad.pad.buttons[0].pressed);
   if (this.test !== this.gamepad.pad.buttons[0].pressed) {
     this.test = this.gamepad.pad.buttons[0].pressed;
-    console.log(this.test);
+    // console.log(this.test);
   }
-  /*console.log('this._button_1', this._button_1);
-  console.log('this._button_2', this._button_2);
-  console.log('this._button_3', this._button_3);
-  console.log('this._button_4', this._button_4);
-  console.log('this._button_5', this._button_5);
-  console.log('this._button_6', this._button_6);*/
 };
 
 prototype._onGamepadChanged = function () {
   this.enabled = !!this.gamepad;
   if (this.enabled) {
-    //this._updateMapping();
+    // TODO
   }
 };
 
-prototype._updateMapping = function () {
-  const { map } = this.gamepad;
-  //map.axes = mapping.axes;
-  //map.buttons = mapping.buttons;
-};
+prototype.aButtonPressed = function () {
+  return this.gamepad.pad.buttons[0].pressed;
+}
+
+prototype.bButtonPressed = function () {
+  return this.gamepad.pad.buttons[1].pressed;
+}
+
+prototype.xButtonPressed = function () {
+  return this.gamepad.pad.buttons[2].pressed;
+}
+
+prototype.yButtonPressed = function () {
+  return this.gamepad.pad.buttons[3].pressed;
+}
+
+prototype.leftBumperPressed = function () {
+  return this.gamepad.pad.buttons[4].pressed;
+}
+
+prototype.rightBumperPressed = function () {
+  return this.gamepad.pad.buttons[5].pressed;
+}
+
+prototype.leftTriggerPressed = function () {
+  return this.gamepad.pad.buttons[6].pressed;
+}
+
+prototype.rightTriggerPressed = function () {
+  return this.gamepad.pad.buttons[7].pressed;
+}
+
+prototype.backButtonPressed = function () {
+  return this.gamepad.pad.buttons[8].pressed;
+}
+
+prototype.startButtonPressed = function () {
+  return this.gamepad.pad.buttons[9].pressed;
+}
+
+prototype.leftAnalogStickPressed = function () {
+  return this.gamepad.pad.buttons[10].pressed;
+}
+
+prototype.rightAnalogStickPressed = function () {
+  return this.gamepad.pad.buttons[11].pressed;
+}
+
+prototype.dPadUpPressed = function () {
+  return this.gamepad.pad.buttons[12].pressed;
+}
+
+prototype.dPadDownPressed = function () {
+  return this.gamepad.pad.buttons[13].pressed;
+}
+
+prototype.dPadLeftPressed = function () {
+  return this.gamepad.pad.buttons[14].pressed;
+}
+
+prototype.dPadRightPressed = function () {
+  return this.gamepad.pad.buttons[15].pressed;
+}
+
+prototype.guideButtonPressed = function () {
+  throw new Error('Vendor button is not supported');
+}
+
+prototype.leftStickX = function () {
+  return this.gamepad.pad.axes[0];
+}
+
+prototype.leftStickY = function () {
+  return this.gamepad.pad.axes[1];
+}
+
+prototype.rightStickX = function () {
+  return this.gamepad.pad.axes[2];
+}
+
+prototype.rightStickY = function () {
+  return this.gamepad.pad.axes[3];
+}

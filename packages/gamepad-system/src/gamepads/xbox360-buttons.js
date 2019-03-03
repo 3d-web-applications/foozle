@@ -1,0 +1,18 @@
+export const XBox360Buttons = [
+  'a',
+  'b',
+  'x',
+  'y',
+  'bumperLeft',
+  'bumperRight',
+  'triggerLeft',
+  'triggerRight',
+  'back',
+  'start',
+  'stickLeft',
+  'stickRight',
+  'up',
+  'down',
+  'left',
+  'right',
+];

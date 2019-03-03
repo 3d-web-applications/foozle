@@ -19,9 +19,11 @@ Object.defineProperty(prototype, 'gamepad', {
   }
 });
 
+prototype.id = 'Xbox 360 Controller (XInput STANDARD GAMEPAD)'
+
 prototype.initialize = function () {
-  this.super();
   this.enabled = false;
+  this.super();
 };
 
 prototype._onGamepadChanged = function () {

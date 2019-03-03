@@ -8,27 +8,46 @@ attributes.add('_gamepadManagerEntity', {
  
 prototype.postInitialize = function () {
   const { GamepadManager } = this._gamepadManagerEntity.script;
-  GamepadManager.registerFunction(this._handleGamepadCountChange, this);
+  this._reservationList = [];
+  GamepadManager.registerFunction(this._handleGamepadCountChanged, this);
 };
 
 prototype._handleGamepadCountChange = function () {
-  const { _reservationList, _gamepadManagerEntity } = this;
+  /*const { _reservationList, _gamepadManagerEntity } = this;
   const { GamepadManager } = _gamepadManagerEntity.script;
   const gamepads = GamepadManager.getGamepads();
   gamepads.forEach((gamepad) => {
     const found = _reservationList.find((script) => script.name === gamepad.pad.name);
-    console.log(gamepad.pad.name, found);
+    console.log(gamepad.pad.name, found, _reservationList);
+    if (!found) {
+      return;
+    }
+    found.gamepad = gamepad;    
+  });*/
+  this.recalculate();
+};
+
+prototype.reserveGamepad = function (script) {
+  if (!this._reservationList) {
+    this._reservationList = [script];
+  } else {
+    this._reservationList.push(script);
+  }
+  console.log('reserveGamepad');
+  this.recalculate();
+}
+
+prototype.recalculate = function () {
+  const { _reservationList, _gamepadManagerEntity } = this;
+  const { GamepadManager } = _gamepadManagerEntity.script;
+  const gamepads = GamepadManager.getGamepads();
+  console.log('gamepads', gamepads);
+  gamepads.forEach((gamepad) => {
+    const found = _reservationList.find((script) => script.id === gamepad.pad.id);
+    console.log(gamepad.pad.id, found, _reservationList);
     if (!found) {
       return;
     }
     found.gamepad = gamepad;    
   });
 };
-
-prototype.reserveGamepad = function (script) {
-  if (!this._reservationList) {
-    this._reservationList = [script];
-    return;
-  }
-  this._reservationList.push(script);
-}

@@ -20,12 +20,12 @@ Object.defineProperty(prototype, 'state', {
   }
 });
 
-prototype.initialize = function () {
-  this.XBox360Input = this._xBox360InputEntity.script.XBox360Input;
-};
-
 prototype.update = function () {
-  const { XBox360Input } = this;
+  const { XBox360Input } = this._xBox360InputEntity.script;
+  if (!XBox360Input.enabled) {
+    return;
+  }
+  
   this.state = {
     aButtonPressed: XBox360Input.aButtonPressed(),
     bButtonPressed: XBox360Input.bButtonPressed(),

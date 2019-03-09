@@ -34,9 +34,9 @@ prototype.initialize = function () {
   }
 
   const model = createXBox360Model();
-  const XBox360Input = this.entity.script.XBox360Input;
+  const { XBox360Input } = this.entity.script;
   this.enabled = XBox360Input.enabled;
-  XBox360Input.on("state", function (enabled) {this.enabled = enabled;});
+  XBox360Input.on("state", function (enabled) { this.enabled = enabled;} );
 
   const arr2 = [...XBox360Buttons, ...XBox360Axes];
   const map = this._mapping.resources;

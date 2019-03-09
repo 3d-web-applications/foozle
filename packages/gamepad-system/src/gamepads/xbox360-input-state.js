@@ -25,13 +25,15 @@ prototype.initialize = function () {
     return;
   }
 
-  if (!this._handlerEntities) {
+  const handlers = this._handlerEntities;
+
+  if (!handlers) {
     this.enabled = false;
     console.error('No handler');
     return;
   }
 
-  this.data = createXBox360Model();
+  const model = createXBox360Model();
   const XBox360Input = this.entity.script.XBox360Input;
   this.enabled = XBox360Input.enabled;
   XBox360Input.on("state", function (enabled) {this.enabled = enabled;});
@@ -62,11 +64,11 @@ prototype.initialize = function () {
   const array = [];
   filtered.forEach((element) => {
     const { name, defaultValue, cbPressed, cbReleased, cbChanged, entityId, scriptName, fn } = element;
-    this.data[name] = defaultValue;
-    if (cbPressed) this.data[cbPressed] = this._handlerEntities[entityId].script[scriptName][cbPressed];
-    if (cbReleased) this.data[cbReleased] = this._handlerEntities[entityId].script[scriptName][cbReleased];
-    if (cbChanged) this.data[cbChanged] = this._handlerEntities[entityId].script[scriptName][cbChanged];
-    array.push(() => { this.data[name] = XBox360Input[fn]() });
+    model[name] = defaultValue;
+    if (cbPressed) model[cbPressed] = handlers[entityId].script[scriptName][cbPressed];
+    if (cbReleased) model[cbReleased] = handlers[entityId].script[scriptName][cbReleased];
+    if (cbChanged) model[cbChanged] = handlers[entityId].script[scriptName][cbChanged];
+    array.push(() => { model[name] = XBox360Input[fn]() });
   });
   
   this._array = array;

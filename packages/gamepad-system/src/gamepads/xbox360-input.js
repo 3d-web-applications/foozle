@@ -1,7 +1,7 @@
 import { base } from './xinput';
 import { extendScript } from '../util/extend-script';
-import { XBox360Axes } from './xbox360-axes';
-import { XBox360Buttons } from './xbox360-buttons';
+import { XBox360Axes } from './data/xbox360-axes';
+import { XBox360Buttons } from './data/xbox360-buttons';
 
 const script = pc.createScript('XBox360Input');
 extendScript(script, base);

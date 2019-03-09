@@ -1,6 +1,5 @@
 import { createXBox360Model } from './xbox360-model';
-import { XBox360Axes } from './xbox360-axes';
-import { XBox360Buttons } from './xbox360-buttons';
+import { XBox360Map } from './data/xbox360-map';
 
 const { attributes, prototype } = pc.createScript('XBox360InputState');
 
@@ -38,12 +37,11 @@ prototype.initialize = function () {
   this.enabled = XBox360Input.enabled;
   XBox360Input.on("state", function (enabled) { this.enabled = enabled;} );
 
-  const arr2 = [...XBox360Buttons, ...XBox360Axes];
   const map = this._mapping.resources;
 
   const filtered = map.filter((element) => {
     let found = false;
-    arr2.forEach((entry) => {
+    XBox360Map.forEach((entry) => {
       if (element.name === entry.name) {
         found = true;
         return;
@@ -53,7 +51,7 @@ prototype.initialize = function () {
   });
 
   filtered.forEach((element) => {
-    arr2.forEach((entry) => {
+    XBox360Map.forEach((entry) => {
       if (element.name === entry.name){
         element.fn = entry.fn;
         return;

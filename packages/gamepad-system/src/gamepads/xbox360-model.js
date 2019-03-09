@@ -1,5 +1,5 @@
-import { XBox360Buttons } from './xbox360-buttons';
-import { XBox360Axes } from './xbox360-axes';
+import { XBox360Buttons } from './data/xbox360-buttons';
+import { XBox360Axes } from './data/xbox360-axes';
 
 export const createXBox360Model = () => {
 

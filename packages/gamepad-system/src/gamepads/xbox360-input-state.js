@@ -19,33 +19,37 @@ attributes.add('_handlerEntities', {
 });
 
 prototype.initialize = function () {
-  const entities = this._handlerEntities;
-
-  if (hasSomeInvalidAttribute(this._mapping, entities)) {
+  const { _mapping, _handlerEntities } = this;
+  
+  if (hasSomeInvalidAttribute(_mapping, _handlerEntities)) {
     this.enabled = false;
     console.error('Initialization error');
     return;
   }
 
   this._array = [];
-
-  const model = createXBox360Model();
   const { XBox360Input } = this.entity.script;
+
+  // mirror state of XBox360Input script and listen for changes
   this.enabled = XBox360Input.enabled;
   XBox360Input.on("state", function (enabled) { this.enabled = enabled;} );
 
-  const map = this._mapping.resources;
+  // used to hold last states of buttons and analog sticks
+  const model = createXBox360Model();
+
+  // get subset of observerable states
   const hasEntry = (name) => XBox360Map.some((entry) => name === entry.name);
-  const filtered = map.filter((element) => hasEntry(element.name));
+  const subset = _mapping.resources.filter((element) => hasEntry(element.name));
   
-  filtered.forEach((element) => {
+  // allow polling for a specific button/stick + bind handlers to process state changes
+  subset.forEach((element) => {
     const {
       name, defaultValue, cbPressed, cbReleased,
-      cbChanged, entityId, scriptName
+      cbChanged, entityId, scriptName,
     } = element;
 
     model[name] = defaultValue;
-    const targetScript = entities[entityId].script[scriptName];
+    const targetScript = _handlerEntities[entityId].script[scriptName];
     if (cbPressed) model[cbPressed] = targetScript[cbPressed];
     if (cbReleased) model[cbReleased] = targetScript[cbReleased];
     if (cbChanged) model[cbChanged] = targetScript[cbChanged];

@@ -1,5 +1,6 @@
 import { createXBox360Model } from './xbox360-model';
 import { XBox360Map } from './data/xbox360-map';
+import { invalid } from '../util/check-preconditions';
 
 const { attributes, prototype } = pc.createScript('XBox360InputState');
 
@@ -18,17 +19,11 @@ attributes.add('_handlerEntities', {
 });
 
 prototype.initialize = function () {
-  if (!this._mapping) {
-    this.enabled = false;
-    console.error('No mapping');
-    return;
-  }
-
   const entities = this._handlerEntities;
 
-  if (!entities) {
+  if (invalid([this._mapping, entities])) {
     this.enabled = false;
-    console.error('No handler');
+    console.error('Initialization error');
     return;
   }
 

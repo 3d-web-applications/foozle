@@ -21,7 +21,7 @@ attributes.add('_handlerEntities', {
 prototype.initialize = function () {
   const entities = this._handlerEntities;
 
-  if (hasSomeInvalidAttribute([this._mapping, entities])) {
+  if (hasSomeInvalidAttribute(this._mapping, entities)) {
     this.enabled = false;
     console.error('Initialization error');
     return;

@@ -1,3 +1,3 @@
 import { isInvalidAttribute } from './is-invalid-attribute';
 
-export const hasSomeInvalidAttribute = ( array ) => array.some(isInvalidAttribute);
+export const hasSomeInvalidAttribute = ( ...args ) => args.some(isInvalidAttribute);

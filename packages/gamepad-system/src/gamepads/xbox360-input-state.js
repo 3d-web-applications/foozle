@@ -1,6 +1,6 @@
 import { createXBox360Model } from './xbox360-model';
 import { XBox360Map } from './data/xbox360-map';
-import { invalid } from '../util/check-preconditions';
+import { hasSomeInvalidAttribute } from '../precondition-check/has-some-invalid-attribute';
 
 const { attributes, prototype } = pc.createScript('XBox360InputState');
 
@@ -21,7 +21,7 @@ attributes.add('_handlerEntities', {
 prototype.initialize = function () {
   const entities = this._handlerEntities;
 
-  if (invalid([this._mapping, entities])) {
+  if (hasSomeInvalidAttribute([this._mapping, entities])) {
     this.enabled = false;
     console.error('Initialization error');
     return;

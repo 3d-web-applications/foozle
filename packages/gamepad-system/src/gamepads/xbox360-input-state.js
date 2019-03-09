@@ -34,16 +34,7 @@ prototype.initialize = function () {
 
   const map = this._mapping.resources;
 
-  const filtered = map.filter((element) => {
-    let found = false;
-    XBox360Map.forEach((entry) => {
-      if (element.name === entry.name) {
-        found = true;
-        return;
-      }
-    });
-    return found;
-  });
+  const filtered = map.filter((element) => XBox360Map.some((entry) => element.name === entry.name));
 
   filtered.forEach((element) => {
     XBox360Map.forEach((entry) => {

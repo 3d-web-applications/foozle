@@ -1,0 +1,22 @@
+[
+  { "name": "a", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "aPressed", "cbReleased": "aReleased" },
+  { "name": "b", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "bPressed", "cbReleased": "bReleased" },
+  { "name": "x", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "xPressed", "cbReleased": "xReleased" },
+  { "name": "y", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "yPressed", "cbReleased": "yReleased" },
+  { "name": "bumperLeft","defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "bumperLeftPressed", "cbReleased": "bumperLeftReleased" },
+  { "name": "bumperRight", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "bumperRightPressed", "cbReleased": "bumperRightReleased" },
+  { "name": "triggerLeft","defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "triggerLeftPressed", "cbReleased": "triggerLeftReleased" },
+  { "name": "triggerRight", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "triggerRightPressed", "cbReleased": "triggerRightReleased" },
+  { "name": "back", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "backPressed", "cbReleased": "backReleased" },
+  { "name": "start", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "startPressed", "cbReleased": "startReleased" },
+  { "name": "stickLeft", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "stickLeftPressed", "cbReleased": "stickLeftReleased" },
+  { "name": "stickRight", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "stickRightPressed", "cbReleased": "stickRightReleased" },
+  { "name": "up", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "upPressed", "cbReleased": "upReleased" },
+  { "name": "down", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "downPressed", "cbReleased": "downReleased" },
+  { "name": "left", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "leftPressed", "cbReleased": "leftReleased" },
+  { "name": "right", "defaultValue": false, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbPressed": "rightPressed", "cbReleased": "rightReleased" },
+  { "name": "stickLeftX", "defaultValue": 0, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbChanged": "stickLeftXChanged" },
+  { "name": "stickLeftY", "defaultValue": 0, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbChanged": "stickLeftYChanged" },
+  { "name": "stickRightX", "defaultValue": 0, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbChanged": "stickRightXChanged" },
+  { "name": "stickRightY", "defaultValue": 0, "entityId": 0, "scriptName": "Xbox360InputStateExample", "cbChanged": "stickRightYChanged" }
+]

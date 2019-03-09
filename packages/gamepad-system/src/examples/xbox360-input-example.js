@@ -43,7 +43,7 @@ prototype.update = function () {
     dPadDownPressed: XBox360Input.dPadDownPressed(),
     dPadLeftPressed: XBox360Input.dPadLeftPressed(),
     dPadRightPressed: XBox360Input.dPadRightPressed(),
-    // guideButtonPressed: XBox360Input.guideButtonPressed(),
+    // guideButtonPressed: XBox360Input.guideButtonPressed(), // vendor button not supported!
     leftStickX: XBox360Input.leftStickX(),
     leftStickY: XBox360Input.leftStickY(),
     rightStickX: XBox360Input.rightStickX(),

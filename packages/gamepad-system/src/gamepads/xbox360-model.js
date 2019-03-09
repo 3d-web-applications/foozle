@@ -5,7 +5,7 @@ export const createXBox360Model = () => {
 
   const model = {};
 
-  XBox360Buttons.forEach((buttonName) => {
+  XBox360Buttons.map(element => element.name).forEach((buttonName) => {
     let isPressed = false;
     Object.defineProperty(model, buttonName, {
       get () {
@@ -28,7 +28,7 @@ export const createXBox360Model = () => {
     });
   });
 
-  XBox360Axes.forEach((axisName) => {
+  XBox360Axes.map(element => element.name).forEach((axisName) => {
     let alteration = 0;
     Object.defineProperty(model, axisName, {
       get () {

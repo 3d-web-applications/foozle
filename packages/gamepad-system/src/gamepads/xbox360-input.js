@@ -1,6 +1,8 @@
 import { base } from './xinput';
 import { extendScript } from '../util/extend-script';
 // import mapping from './data/gamepad-map.json';
+import { XBox360Axes } from './xbox360-axes';
+import { XBox360Buttons } from './xbox360-buttons';
 
 const script = pc.createScript('XBox360Input');
 extendScript(script, base);
@@ -35,6 +37,18 @@ prototype._onGamepadChanged = function () {
   }
 };
 
+XBox360Buttons.forEach((element) => {
+  prototype[element.fn] = function () {
+    return this._buttons[element.id].pressed;
+  };
+});
+
+XBox360Axes.forEach((element) => {
+  prototype[element.fn] = function () {
+    return this._pad.axes[element.id];
+  };
+});
+/*
 prototype.aButtonPressed = function () {
   return this._buttons[0].pressed;
 };
@@ -117,4 +131,4 @@ prototype.rightStickX = function () {
 
 prototype.rightStickY = function () {
   return this._pad.axes[3];
-};
+};*/

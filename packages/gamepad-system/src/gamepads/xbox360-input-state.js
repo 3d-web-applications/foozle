@@ -1,172 +1,81 @@
-import { base } from './xinput';
-import { extendScript } from '../util/extend-script';
-//import { createNumberProperty } from '../counter';
-// import { XBox360Model } from './xbox360-model';
 import { createXBox360Model } from './xbox360-model';
+import { XBox360Axes } from './xbox360-axes';
+import { XBox360Buttons } from './xbox360-buttons';
 
-const script = pc.createScript('XBox360InputState');
-extendScript(script, base);
-const { prototype } = script;
+const { attributes, prototype } = pc.createScript('XBox360InputState');
 
-/*Object.defineProperty(prototype, 'gamepad', {
-  get () {
-    return this._gamepad || null;
-  },
-  set (value) {
-    if (value === this._gamepad) {
-      return;
-    }
-    this._gamepad = value;
-    this._onGamepadChanged();
-  }
+attributes.add('_mapping', {
+  type: 'asset',
+  assetType: 'json',
+  title: 'Mapping',
+  description: 'Controller mapping',
 });
 
-Object.defineProperty(prototype, 'buttons', {
-  get () {
-    return this._buttons;
-  },
-  set (value) {
-    if (value === this._buttons) {
-      return;
-    }
-    console.log('change', this._buttons);
-  }
-});*/
-
-/*createNumberProperty('a', prototype, '', false);
-createNumberProperty('b', prototype, '', false);
-createNumberProperty('x', prototype, '', false);
-createNumberProperty('y', prototype, '', false);
-createNumberProperty('leftBumper', prototype, '', false);
-createNumberProperty('rightBumper', prototype, '', false);
-createNumberProperty('leftTrigger', prototype, '', false);
-createNumberProperty('rightTrigger', prototype, '', false);
-createNumberProperty('back', prototype, '', false);
-createNumberProperty('start', prototype, '', false);
-createNumberProperty('leftStick', prototype, '', false);
-createNumberProperty('rightStick', prototype, '', false);
-createNumberProperty('up', prototype, '', false);
-createNumberProperty('down', prototype, '', false);
-createNumberProperty('left', prototype, '', false);
-createNumberProperty('right', prototype, '', false);
-createNumberProperty('leftStickXY', prototype, '', false);
-createNumberProperty('rightStickXY', prototype, '', false);*/
+attributes.add('_handlerEntities', {
+  type: 'entity',
+  array: true,
+  title: 'Handlers',
+  description: 'Entity with a script handling button presse and button release events',
+});
 
 prototype.initialize = function () {
-  this.super();
-  this.enabled = false;
-
-  const model = createXBox360Model();
-  console.log(model);
-  model.aPressed = () => {console.log('pressed')};
-  model.a = true;
-  model.a = false;
-  model.a = true;
-  model.aReleased = () => {console.log('released')};
-  model.a = false;
-  model.stickRightXChanged = () => {console.log('stickX changed');}
-  model.stickRightX = 0.5;
-};
-
-prototype._onGamepadChanged = function () {
-  this.enabled = !!this.gamepad;
-  if (this.enabled) {
-    this._pad = this.gamepad.pad;
-    this._buttons = this.gamepad.pad.buttons;
-    // TODO
+  if (!this._mapping) {
+    this.enabled = false;
+    console.error('No mapping');
+    return;
   }
+
+  if (!this._handlerEntities) {
+    this.enabled = false;
+    console.error('No handler');
+    return;
+  }
+
+  this.data = createXBox360Model();
+  const XBox360Input = this.entity.script.XBox360Input;
+  this.enabled = XBox360Input.enabled;
+  XBox360Input.on("state", function (enabled) {this.enabled = enabled;});
+
+  const arr2 = [...XBox360Buttons, ...XBox360Axes];
+  const map = this._mapping.resources;
+
+  const filtered = map.filter((element) => {
+    let found = false;
+    arr2.forEach((entry) => {
+      if (element.name === entry.name) {
+        found = true;
+        return;
+      }
+    });
+    return found;
+  });
+
+  filtered.forEach((element) => {
+    arr2.forEach((entry) => {
+      if (element.name === entry.name){
+        element.fn = entry.fn;
+        return;
+      }
+    });
+  });
+
+  const array = [];
+  filtered.forEach((element) => {
+    const { name, defaultValue, cbPressed, cbReleased, cbChanged, entityId, scriptName, fn } = element;
+    this.data[name] = defaultValue;
+    if (cbPressed) this.data[cbPressed] = this._handlerEntities[entityId].script[scriptName][cbPressed];
+    if (cbReleased) this.data[cbReleased] = this._handlerEntities[entityId].script[scriptName][cbReleased];
+    if (cbChanged) this.data[cbChanged] = this._handlerEntities[entityId].script[scriptName][cbChanged];
+    // TODO attach callbacks: released, pressed, changed
+    array.push(() => { this.data[name] = XBox360Input[fn]() });
+  });
+  
+  this._array = array;
+  //this.data.aPressed = () => { console.log('a'); } // TODO remove
+  console.log(this.data);
+
 };
 
 prototype.update = function () {
-  this.buttons = this._buttons;
-  /*this.ABC = this._pad.axes[0];
-  this.ABC = this._pad.axes[1];
-  this.ABC = this._pad.axes[2];
-  this.ABC = this._pad.axes[3];*/
+  this._array.forEach( fn => fn() );
 };
-
-/*
-prototype.aButtonPressed = function () {
-  return this._buttons[0].pressed;
-};
-
-prototype.bButtonPressed = function () {
-  return this._buttons[1].pressed;
-};
-
-prototype.xButtonPressed = function () {
-  return this._buttons[2].pressed;
-};
-
-prototype.yButtonPressed = function () {
-  return this._buttons[3].pressed;
-};
-
-prototype.leftBumperPressed = function () {
-  return this._buttons[4].pressed;
-};
-
-prototype.rightBumperPressed = function () {
-  return this._buttons[5].pressed;
-};
-
-prototype.leftTriggerPressed = function () {
-  return this._buttons[6].pressed;
-};
-
-prototype.rightTriggerPressed = function () {
-  return this._buttons[7].pressed;
-};
-
-prototype.backButtonPressed = function () {
-  return this._buttons[8].pressed;
-};
-
-prototype.startButtonPressed = function () {
-  return this._buttons[9].pressed;
-};
-
-prototype.leftAnalogStickPressed = function () {
-  return this._buttons[10].pressed;
-};
-
-prototype.rightAnalogStickPressed = function () {
-  return this._buttons[11].pressed;
-};
-
-prototype.dPadUpPressed = function () {
-  return this._buttons[12].pressed;
-};
-
-prototype.dPadDownPressed = function () {
-  return this._buttons[13].pressed;
-};
-
-prototype.dPadLeftPressed = function () {
-  return this._buttons[14].pressed;
-};
-
-prototype.dPadRightPressed = function () {
-  return this._buttons[15].pressed;
-};
-
-prototype.guideButtonPressed = function () {
-  throw new Error('Vendor button is not supported');
-};
-
-prototype.leftStickX = function () {
-  return this._pad.axes[0];
-};
-
-prototype.leftStickY = function () {
-  return this._pad.axes[1];
-};
-
-prototype.rightStickX = function () {
-  return this._pad.axes[2];
-};
-
-prototype.rightStickY = function () {
-  return this._pad.axes[3];
-};
-*/

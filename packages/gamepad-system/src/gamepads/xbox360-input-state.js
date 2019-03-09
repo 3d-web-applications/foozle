@@ -66,14 +66,10 @@ prototype.initialize = function () {
     if (cbPressed) this.data[cbPressed] = this._handlerEntities[entityId].script[scriptName][cbPressed];
     if (cbReleased) this.data[cbReleased] = this._handlerEntities[entityId].script[scriptName][cbReleased];
     if (cbChanged) this.data[cbChanged] = this._handlerEntities[entityId].script[scriptName][cbChanged];
-    // TODO attach callbacks: released, pressed, changed
     array.push(() => { this.data[name] = XBox360Input[fn]() });
   });
   
   this._array = array;
-  //this.data.aPressed = () => { console.log('a'); } // TODO remove
-  console.log(this.data);
-
 };
 
 prototype.update = function () {

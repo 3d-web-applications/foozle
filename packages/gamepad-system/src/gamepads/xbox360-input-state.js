@@ -27,14 +27,16 @@ prototype.initialize = function () {
     return;
   }
 
+  this._array = [];
+
   const model = createXBox360Model();
   const { XBox360Input } = this.entity.script;
   this.enabled = XBox360Input.enabled;
   XBox360Input.on("state", function (enabled) { this.enabled = enabled;} );
 
   const map = this._mapping.resources;
-
-  const filtered = map.filter((element) => XBox360Map.some((entry) => element.name === entry.name));
+  const hasEntry = (name) => XBox360Map.some((entry) => name === entry.name);
+  const filtered = map.filter((element) => hasEntry(element.name));
 
   filtered.forEach((element) => {
     XBox360Map.forEach((entry) => {
@@ -45,7 +47,7 @@ prototype.initialize = function () {
     });
   });
 
-  const array = [];
+  
   filtered.forEach((element) => {
     const { name, defaultValue, cbPressed, cbReleased, cbChanged, entityId, scriptName, fn } = element;
     model[name] = defaultValue;
@@ -53,10 +55,8 @@ prototype.initialize = function () {
     if (cbPressed) model[cbPressed] = script[scriptName][cbPressed];
     if (cbReleased) model[cbReleased] = script[scriptName][cbReleased];
     if (cbChanged) model[cbChanged] = script[scriptName][cbChanged];
-    array.push(() => { model[name] = XBox360Input[fn]() });
+    this._array.push(() => { model[name] = XBox360Input[fn]() });
   });
-  
-  this._array = array;
 };
 
 prototype.update = function () {

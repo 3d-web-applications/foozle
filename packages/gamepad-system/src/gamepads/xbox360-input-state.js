@@ -37,25 +37,21 @@ prototype.initialize = function () {
   const map = this._mapping.resources;
   const hasEntry = (name) => XBox360Map.some((entry) => name === entry.name);
   const filtered = map.filter((element) => hasEntry(element.name));
-
-  filtered.forEach((element) => {
-    XBox360Map.forEach((entry) => {
-      if (element.name === entry.name){
-        element.fn = entry.fn;
-        return;
-      }
-    });
-  });
-
   
   filtered.forEach((element) => {
-    const { name, defaultValue, cbPressed, cbReleased, cbChanged, entityId, scriptName, fn } = element;
+    const {
+      name, defaultValue, cbPressed, cbReleased,
+      cbChanged, entityId, scriptName
+    } = element;
+
     model[name] = defaultValue;
-    const { script } = entities[entityId];
-    if (cbPressed) model[cbPressed] = script[scriptName][cbPressed];
-    if (cbReleased) model[cbReleased] = script[scriptName][cbReleased];
-    if (cbChanged) model[cbChanged] = script[scriptName][cbChanged];
-    this._array.push(() => { model[name] = XBox360Input[fn]() });
+    const targetScript = entities[entityId].script[scriptName];
+    if (cbPressed) model[cbPressed] = targetScript[cbPressed];
+    if (cbReleased) model[cbReleased] = targetScript[cbReleased];
+    if (cbChanged) model[cbChanged] = targetScript[cbChanged];
+
+    const entry = XBox360Map.find((entry) => name === entry.name);
+    this._array.push(() => { model[name] = XBox360Input[entry.fn]() });
   });
 };
 

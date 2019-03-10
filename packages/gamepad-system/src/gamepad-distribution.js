@@ -13,17 +13,6 @@ prototype.postInitialize = function () {
 };
 
 prototype._handleGamepadCountChange = function () {
-  /*const { _reservationList, _gamepadManagerEntity } = this;
-  const { GamepadManager } = _gamepadManagerEntity.script;
-  const gamepads = GamepadManager.getGamepads();
-  gamepads.forEach((gamepad) => {
-    const found = _reservationList.find((script) => script.name === gamepad.pad.name);
-    console.log(gamepad.pad.name, found, _reservationList);
-    if (!found) {
-      return;
-    }
-    found.gamepad = gamepad;    
-  });*/
   this.recalculate();
 };
 

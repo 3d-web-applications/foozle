@@ -27,8 +27,18 @@
 
 ## Common Issues:
 
-### Controllers Were Not Detected
+### Controllers Were Not Detected At All
 Another application (e.g another webbrowser) is currently using the controllers. Close those supposed troublemakers. If this does not help, restart your PC/Mac.
+
+Calling *navigator.getGamepads()* in Firefox to early, is  another reason why controllers might not be detected. One solution is to [scan for changes](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API) contiuously. See code below! 
+```javascript
+var scangamepads = function () {
+  var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+  console.log(gamepads);
+};
+    
+setInterval(scangamepads, 500);
+```
 
 
 

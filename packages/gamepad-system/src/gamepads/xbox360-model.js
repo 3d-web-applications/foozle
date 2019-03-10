@@ -1,11 +1,8 @@
-import { XBox360Buttons } from './data/xbox360-buttons';
-import { XBox360Axes } from './data/xbox360-axes';
-
-export const createXBox360Model = () => {
+export const createXBox360Model = (buttons, axes) => {
 
   const model = {};
 
-  XBox360Buttons.map(element => element.name).forEach((buttonName) => {
+  buttons.map(element => element.name).forEach((buttonName) => {
     let isPressed = false;
     Object.defineProperty(model, buttonName, {
       get () {
@@ -28,7 +25,7 @@ export const createXBox360Model = () => {
     });
   });
 
-  XBox360Axes.map(element => element.name).forEach((axisName) => {
+  axes.map(element => element.name).forEach((axisName) => {
     let alteration = 0;
     Object.defineProperty(model, axisName, {
       get () {

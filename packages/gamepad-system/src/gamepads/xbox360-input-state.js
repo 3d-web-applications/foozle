@@ -1,5 +1,6 @@
+import { XBox360Buttons } from './data/xbox360-buttons';
+import { XBox360Axes } from './data/xbox360-axes';
 import { createXBox360Model } from './xbox360-model';
-import { XBox360Map } from './data/xbox360-map';
 import { hasSomeInvalidAttribute } from '../precondition-check/has-some-invalid-attribute';
 
 const { attributes, prototype } = pc.createScript('XBox360InputState');
@@ -35,10 +36,11 @@ prototype.initialize = function () {
   XBox360Input.on("state", function (enabled) { this.enabled = enabled;} );
 
   // used to hold last states of buttons and analog sticks
-  const model = createXBox360Model();
+  const model = createXBox360Model(XBox360Buttons, XBox360Axes);
 
   // get subset of observerable states
-  const hasEntry = (name) => XBox360Map.some((entry) => name === entry.name);
+  const controls = [...XBox360Buttons, ...XBox360Axes];
+  const hasEntry = (name) => controls.some((entry) => name === entry.name);
   const subset = _mapping.resources.filter((element) => hasEntry(element.name));
   
   // allow polling for a specific button/stick + bind handlers to process state changes
@@ -54,7 +56,7 @@ prototype.initialize = function () {
     if (cbReleased) model[cbReleased] = targetScript[cbReleased];
     if (cbChanged) model[cbChanged] = targetScript[cbChanged];
 
-    const entry = XBox360Map.find((entry) => name === entry.name);
+    const entry = controls.find((entry) => name === entry.name);
     this._array.push(() => { model[name] = XBox360Input[entry.fn]() });
   });
 };

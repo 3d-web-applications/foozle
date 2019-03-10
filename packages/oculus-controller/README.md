@@ -14,7 +14,7 @@
 | Chrome      | Xbox 360 Controller (XInput STANDARD GAMEPAD) | -                   | -                    |
 | Chrome (VR) | Xbox 360 Controller (XInput STANDARD GAMEPAD) | OpenVR Gamepad      | OpenVR Gamepad       |
 | Firefox     | Xbox 360 Controller (XInput STANDARD GAMEPAD) | -                   | -                    |
-| Firefox (VR)| Xinput                                        | Oculus Touch Left   | Oculus Touch Right   |
+| Firefox (VR)| xinput                                        | Oculus Touch Left   | Oculus Touch Right   |
 
 ### Mac
 

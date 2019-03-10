@@ -30,10 +30,12 @@ prototype.recalculate = function () {
   const { _reservationList, _gamepadManagerEntity } = this;
   const { GamepadManager } = _gamepadManagerEntity.script;
   const gamepads = GamepadManager.getGamepads();
-  console.log('gamepads', gamepads);
+  console.log('gamepads', gamepads, _reservationList);
   gamepads.forEach((gamepad) => {
-    const found = _reservationList.find((script) => script.id === gamepad.pad.id);
-    console.log(gamepad.pad.id, found, _reservationList);
+    const { pad } = gamepad;
+    const filtered = _reservationList.filter((script) => script.id === pad.id);
+    const occurence = gamepads.findIndex((gp) => gp.pad.index === pad.index);
+    const found = filtered[occurence];
     if (!found) {
       return;
     }

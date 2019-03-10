@@ -1,6 +1,6 @@
 import { XBox360Buttons } from './data/xbox360-buttons';
 import { XBox360Axes } from './data/xbox360-axes';
-import { createXBox360Model } from './gamepad-model';
+import { createGamepadModel } from './gamepad-model';
 import { hasSomeInvalidAttribute } from '../precondition-check/has-some-invalid-attribute';
 
 const { attributes, prototype } = pc.createScript('XBox360InputState');
@@ -36,7 +36,7 @@ prototype.initialize = function () {
   XBox360Input.on("state", function (enabled) { this.enabled = enabled;} );
 
   // used to hold last states of buttons and analog sticks
-  const model = createXBox360Model(XBox360Buttons, XBox360Axes);
+  const model = createGamepadModel(XBox360Buttons, XBox360Axes);
 
   // get subset of observerable states
   const controls = [...XBox360Buttons, ...XBox360Axes];

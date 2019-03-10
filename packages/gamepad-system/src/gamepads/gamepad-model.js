@@ -1,4 +1,4 @@
-export const createXBox360Model = (buttons, axes) => {
+export const createGamepadModel = (buttons, axes) => {
 
   const model = {};
 

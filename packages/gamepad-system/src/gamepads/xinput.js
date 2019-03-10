@@ -14,6 +14,7 @@ attributes.add('_gamepadDistributionEntity', {
   description: 'Entity with a Gamepad Distribution script attached',
 });
 
+// TODO not in use right now
 Object.defineProperty(prototype, 'connected', {
   get () {
     return this._connected || false;

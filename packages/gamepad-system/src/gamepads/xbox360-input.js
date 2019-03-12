@@ -20,7 +20,7 @@ Object.defineProperty(prototype, 'gamepad', {
   }
 });
 
-prototype.id = 'Xbox 360 Controller (XInput STANDARD GAMEPAD)'
+prototype.ids = ['xinput', 'Xbox 360 Controller (XInput STANDARD GAMEPAD)'];
 
 prototype.initialize = function () {
   this.enabled = false;
@@ -28,12 +28,9 @@ prototype.initialize = function () {
 };
 
 prototype._onGamepadChanged = function () {
-  this.enabled = !!this.gamepad;
-  if (this.enabled) {
-    this._pad = this.gamepad.pad;
     this._buttons = this.gamepad.pad.buttons;
-    // TODO
-  }
+    this._axes = this.gamepad.pad.axes;
+    this.enabled = true;
 };
 
 XBox360Buttons.forEach((element) => {
@@ -44,6 +41,6 @@ XBox360Buttons.forEach((element) => {
 
 XBox360Axes.forEach((element) => {
   prototype[element.fn] = function () {
-    return this._pad.axes[element.id];
+    return this._axes[element.id];
   };
 });

@@ -27,7 +27,7 @@ Object.defineProperty(prototype, 'connected', {
   }
 });
 
-prototype.id = 'xinput'
+prototype.ids = ['xinput'];
 
 prototype.initialize = function () {
   const { GamepadDistribution } = this._gamepadDistributionEntity.script;

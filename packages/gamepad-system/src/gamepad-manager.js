@@ -27,16 +27,12 @@ prototype.initialize = function() {
   this._gamepads = new pc.GamePads();
 };
 
-/**
- * Update is changed at runtime.
- */
 prototype.update = function (/* dt */) {
-  const pads = this.getGamepads();
-  this._gamepads.update();
-  this._gamepadCount = pads.length;
+  this._gamepadCount = this.getGamepads().length;
 };
 
 prototype.getGamepads = function () {
+  this._gamepads.update();
   return this._gamepads.poll();
 };
 

@@ -33,7 +33,7 @@ prototype.initialize = function () {
 
   // mirror state of XBox360Input script and listen for changes
   this.enabled = XBox360Input.enabled;
-  XBox360Input.on("state", function (enabled) { this.enabled = enabled;} );
+  XBox360Input.on("state", (enabled) => { this.enabled = enabled;} );
 
   // used to hold last states of buttons and analog sticks
   const model = createGamepadModel(XBox360Buttons, XBox360Axes);
@@ -61,6 +61,6 @@ prototype.initialize = function () {
   });
 };
 
-prototype.update = function () {
+prototype.update = function (/* dt */) {
   this._array.forEach( fn => fn() );
 };

@@ -1,16 +1,5 @@
-import { createRegistry } from '@foozle/function-registry';
-
-import { createNumberProperty } from './counter';
-
 const { prototype } = pc.createScript('GamepadManager');
 
-createNumberProperty(
-  '_gamepadCount', prototype, '_onGamepadCountChanged', 0
-);
-
-/**
- * Prepare gamepad polling and subscribe for VR enter/exit events. 
- */
 prototype.initialize = function() {
   const { gamepads } = this.app;
   if (!gamepads || !gamepads.gamepadsSupported) {
@@ -23,27 +12,39 @@ prototype.initialize = function() {
     return;
   }
 
-  this._registry = createRegistry();
-  this._gamepads = new pc.GamePads();
+  this._gpControllerPool = this._gpControllerPool || [];
+  window.addEventListener('gamepadconnected', (e) => this._onGamepadConnected(e.gamepad), true);
+  window.addEventListener('gamepaddisconnected', (e) => this._onGamepadDisconnected(e.gamepad), true);
 };
 
-prototype.update = function (/* dt */) {
-  // this._gamepadCount = this.getGamepads().length;
+prototype.addController = function (script) {
+  script.index = -1;
+  this._gpControllerPool.push(script);
 };
 
-prototype.getGamepads = function () {
-  this._gamepads.update();
-  return this._gamepads.poll();
+prototype._findController = function (gamepadIndex) {
+  return this._gpControllerPool.find(controller => controller.index === gamepadIndex);
 };
 
-prototype._onGamepadCountChanged = function () {
-  this._registry.notify();
+prototype._selectFreeController = function (gamepadId) {
+  return this._gpControllerPool.find(controller => controller.index === -1 && controller.ids.indexOf(gamepadId) > -1);
 };
 
-prototype.registerFunction = function (fn, scope) {
-  if (fn) this._registry.register(fn.bind(scope));
+prototype._onGamepadConnected = function (gamepad) {
+  const controller = this._selectFreeController(gamepad.id);
+  if (!controller) {
+    console.error('No available controllers left');
+    return;
+  }
+  controller.index = gamepad.index;
+  controller.gamepad = gamepad;
 };
 
-prototype.unregisterFunctions = function (fn, scope) {
-  if (fn) this._registry.unregister(fn.bind(scope));
+prototype._onGamepadDisconnected = function (gamepad) {
+  const controller = this._findController(gamepad.index);
+  if (!controller) {
+    return;
+  }
+  controller.index = -1;
+  controller.gamepad = null;
 };

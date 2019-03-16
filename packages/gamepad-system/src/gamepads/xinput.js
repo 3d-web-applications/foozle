@@ -8,30 +8,17 @@ attributes.add = collectAttributes(
   inheritableAttributes,
 );
 
-attributes.add('_gamepadDistributionEntity', {
+attributes.add('_gamepadManagerEntity', {
   type: 'entity',
-  title: 'Gamepad Distribution Entity',
-  description: 'Entity with a Gamepad Distribution script attached',
-});
-
-// TODO not in use right now
-Object.defineProperty(prototype, 'connected', {
-  get () {
-    return this._connected || false;
-  },
-  set (value) {
-    if (value === this._connected) {
-      return;
-    }
-    this._connected = value;
-  }
+  title: 'Gamepad Manager Entity',
+  description: 'Entity with a Gamepad Manager script attached',
 });
 
 prototype.ids = ['xinput'];
 
 prototype.initialize = function () {
-  const { GamepadDistribution } = this._gamepadDistributionEntity.script;
-  GamepadDistribution.addController(this);
+  const { GamepadManager } = this._gamepadManagerEntity.script;
+  GamepadManager.addController(this);
 };
 
 export const base = { prototype, attributes: inheritableAttributes };

@@ -31,7 +31,7 @@ export const createGamepadModel = (buttons, axes) => {
       get () {
         return alteration;
       },
-      set (value) {
+      set (value) {       
         if (value === alteration) {
           return;
         }

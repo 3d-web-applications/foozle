@@ -29,7 +29,8 @@ prototype.initialize = function () {
 
 prototype._onGamepadChanged = function () {
     this._buttons = this.gamepad.pad.buttons;
-    this._axes = this.gamepad.pad.axes;
+    // Do not use the following line of code or changes from analog sticks were not detected
+    // this._axes = this.gamepad.pad.axes;
     this.enabled = true;
 };
 
@@ -41,6 +42,6 @@ XBox360Buttons.forEach((element) => {
 
 XBox360Axes.forEach((element) => {
   prototype[element.fn] = function () {
-    return this._axes[element.id];
+    return this.gamepad.pad.axes[element.id];
   };
 });

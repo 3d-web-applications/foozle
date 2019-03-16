@@ -6,49 +6,40 @@ attributes.add('_gamepadManagerEntity', {
   description: 'Entity with a Gamepad Manager script attached',
 });
  
-prototype.postInitialize = function () {
-  const { GamepadManager } = this._gamepadManagerEntity.script;
-  this._reservationList = this._reservationList || [];
-  GamepadManager.registerFunction(this._handleGamepadCountChanged, this);
+prototype.initialize = function () {
+  this._gpControllerPool = this._gpControllerPool || [];
+  window.addEventListener('gamepadconnected', (e) => this._onGamepadConnected(e.gamepad), true);
+  window.addEventListener('gamepaddisconnected', (e) => this._onGamepadDisconnected(e.gamepad), true);
 };
 
-prototype._handleGamepadCountChanged = function () {
-  this.recalculate();
+prototype.addController = function (script) {
+  script.index = -1;
+  this._gpControllerPool.push(script);
 };
 
-prototype.reserveGamepad = function (script) {
-  if (!this._reservationList) {
-    this._reservationList = [script];
-  } else {
-    this._reservationList.push(script);
+prototype.findController = function (gamepadIndex) {
+  return this._gpControllerPool.find(controller => controller.index === gamepadIndex);
+};
+
+prototype.selectFreeController = function (gamepadId) {
+  return this._gpControllerPool.find(controller => controller.index === -1 && controller.ids.indexOf(gamepadId) > -1);
+};
+
+prototype._onGamepadConnected = function (gamepad) {
+  const controller = this.selectFreeController(gamepad.id);
+  if (!controller) {
+    console.error('No available controllers left');
+    return;
   }
-  this.recalculate();
-}
-
-prototype.recalculate = function () {
-  const { _reservationList, _gamepadManagerEntity } = this;
-  const { GamepadManager } = _gamepadManagerEntity.script;
-
-  const gamepads = GamepadManager.getGamepads();
-  gamepads.forEach((gamepad) => {
-    const { pad } = gamepad;
-    const filtered = _reservationList.filter((script) => script.ids.indexOf(pad.id) > -1);
-    const occurence = gamepads.findIndex((gp) => gp.pad.index === pad.index); // TODO findIndex in filtered?
-    const found = filtered[occurence];
-    if (!found) {
-      return;
-    }
-    
-    found.gamepad = gamepad;
-  });
+  controller.index = gamepad.index;
+  controller.gamepad = gamepad;
 };
-/**
-var scangamepads = function () {
-        var gp = new pc.GamePads();
-        //gp.update();
-        console.log(gp.poll());
-        console.log(gp.poll());
-        var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
-        console.log('hier', gamepads);
-    }; 
- */
+
+prototype._onGamepadDisconnected = function (gamepad) {
+  const controller = this.findController(gamepad.index);
+  if (!controller) {
+    return;
+  }
+  controller.index = -1;
+  controller.gamepad = null;
+};

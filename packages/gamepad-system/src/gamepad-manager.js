@@ -28,7 +28,7 @@ prototype.initialize = function() {
 };
 
 prototype.update = function (/* dt */) {
-  this._gamepadCount = this.getGamepads().length;
+  // this._gamepadCount = this.getGamepads().length;
 };
 
 prototype.getGamepads = function () {

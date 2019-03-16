@@ -31,7 +31,7 @@ prototype.ids = ['xinput'];
 
 prototype.initialize = function () {
   const { GamepadDistribution } = this._gamepadDistributionEntity.script;
-  GamepadDistribution.reserveGamepad(this);
+  GamepadDistribution.addController(this);
 };
 
 export const base = { prototype, attributes: inheritableAttributes };

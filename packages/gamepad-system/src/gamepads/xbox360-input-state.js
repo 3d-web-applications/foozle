@@ -1,7 +1,8 @@
+import { hasSomeInvalidAttribute } from '@foozle/precondition-check';
+
 import { XBox360Buttons } from './data/xbox360-buttons';
 import { XBox360Axes } from './data/xbox360-axes';
 import { createGamepadModel } from './gamepad-model';
-import { hasSomeInvalidAttribute } from '../precondition-check/has-some-invalid-attribute';
 
 const { attributes, prototype } = pc.createScript('XBox360InputState');
 

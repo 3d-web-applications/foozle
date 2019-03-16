@@ -1,5 +1,5 @@
 {
-  "name": "@foozle/gamepad-system",
+  "name": "@foozle/precondition-check",
   "version": "0.0.0",
   "description": "",
   "main": "main.js",
@@ -9,12 +9,6 @@
     "production": "webpack --mode production --config webpack.production.config.babel.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@foozle/precondition-check": "^0.0.0"
-  },
-  "devDependencies": {
-    "copy-webpack-plugin": "^5.0.0"
-  }
+  "author": "Lars Wobus",
+  "license": "MIT"
 }

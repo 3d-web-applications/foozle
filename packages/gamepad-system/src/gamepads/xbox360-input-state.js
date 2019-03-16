@@ -19,6 +19,13 @@ attributes.add('_handlerEntities', {
   description: 'Entity with a script handling button presse and button release events',
 });
 
+attributes.add('_deadZone', {
+  type: 'number',
+  default: 0.25,
+  title: 'Dead Zone',
+  description: 'Specifies which changes of analog sticks are not captured',
+});
+
 prototype.initialize = function () {
   const { _mapping, _handlerEntities } = this;
   
@@ -36,7 +43,7 @@ prototype.initialize = function () {
   XBox360Input.on("state", (enabled) => { this.enabled = enabled;} );
 
   // used to hold last states of buttons and analog sticks
-  const model = createGamepadModel(XBox360Buttons, XBox360Axes);
+  const model = createGamepadModel(XBox360Buttons, XBox360Axes, this._deadZone);
 
   // get subset of observerable states
   const controls = [...XBox360Buttons, ...XBox360Axes];

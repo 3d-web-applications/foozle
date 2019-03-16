@@ -1,4 +1,4 @@
-export const createGamepadModel = (buttons, axes) => {
+export const createGamepadModel = (buttons, axes, deadZone = 0.25) => {
 
   const model = {};
 
@@ -31,7 +31,10 @@ export const createGamepadModel = (buttons, axes) => {
       get () {
         return alteration;
       },
-      set (value) {       
+      set (value) {
+        if (Math.abs(value) < deadZone) {
+          value = 0;
+        }
         if (value === alteration) {
           return;
         }

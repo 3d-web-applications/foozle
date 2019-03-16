@@ -13,11 +13,6 @@ module.exports = {
     ]),
   ],
   context: __dirname,
-  /*entry: './main.js',
-  output: {
-    filename: `${folderName}.js`,
-    path: `${__dirname}/dist`,
-  },*/
   entry: {
     [`${folderName}.js`]: './main.js',
     'xbox360-input-example.js': './src/examples/xbox360-input-example.js',

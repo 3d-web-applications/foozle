@@ -6,7 +6,7 @@ module.exports = {
   plugins: [
     new CopyPlugin([
       {
-        from: './src/gamepads/xbox360-mapping.json',
+        from: './src/examples/data/xbox360-mapping.json',
         to: './',
         force: true
       },

@@ -7,28 +7,11 @@ const script = pc.createScript('XBox360Input');
 extendScript(script, base);
 const { prototype } = script;
 
-Object.defineProperty(prototype, 'gamepad', {
-  get () {
-    return this._gamepad || null;
-  },
-  set (value) {
-    if (value === this._gamepad) {
-      return;
-    }
-    this._gamepad = value;
-    this._onGamepadChanged();
-  }
-});
-
 prototype.ids = ['xinput', 'Xbox 360 Controller (XInput STANDARD GAMEPAD)'];
 
 prototype.initialize = function () {
   this.enabled = false;
   this.super();
-};
-
-prototype._onGamepadChanged = function () {
-  this.enabled = !!this.gamepad;
 };
 
 XBox360Buttons.forEach((element) => {

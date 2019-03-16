@@ -14,11 +14,28 @@ attributes.add('_gamepadManagerEntity', {
   description: 'Entity with a Gamepad Manager script attached',
 });
 
+Object.defineProperty(prototype, 'gamepad', {
+  get () {
+    return this._gamepad || null;
+  },
+  set (value) {
+    if (value === this._gamepad) {
+      return;
+    }
+    this._gamepad = value;
+    this._onGamepadChanged();
+  }
+});
+
 prototype.ids = ['xinput'];
 
 prototype.initialize = function () {
   const { GamepadManager } = this._gamepadManagerEntity.script;
   GamepadManager.addController(this);
+};
+
+prototype._onGamepadChanged = function () {
+  this.enabled = !!this.gamepad;
 };
 
 export const base = { prototype, attributes: inheritableAttributes };

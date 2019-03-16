@@ -1,11 +1,25 @@
+const CopyPlugin = require('copy-webpack-plugin');
+
 const folderName = __dirname.split(/[\\/]/).pop();
 
 module.exports = {
-  plugins: [],
+  plugins: [
+    new CopyPlugin([
+      {
+        from: './src/gamepads/xbox360-mapping.json',
+        to: './',
+        force: true
+      },
+    ]),
+  ],
   context: __dirname,
-  entry: './main.js',
+  entry: {
+    [`${folderName}.js`]: './main.js',
+    'xbox360-input-example.js': './src/examples/xbox360-input-example.js',
+    'xbox360-input-state-example.js': './src/examples/xbox360-input-state-example.js'
+  },
   output: {
-    filename: `${folderName}.js`,
+    filename: '[name]',
     path: `${__dirname}/dist`,
   },
   module: {

@@ -3,8 +3,7 @@
 Provides scripts to retrieve data from gamepads.
 
 ## Supported Gamepads
-- Xbox360 controllers
-- Others should work as well!
+- Xbox360 controllers - others should also work with these settings
 
 ## Example Usage
 - Place a single instance of GamepadManager into your scene

@@ -30,8 +30,8 @@ prototype.update = function () {
     stickPressed: OculusTouchInputLeft.analogStickPressed(),
     indexPressed: OculusTouchInputLeft.indexTriggerPressed(),
     handPressed: OculusTouchInputLeft.handTriggerPressed(),
-    yPressed: OculusTouchInputLeft.xButtonPressed(),
-    xPressed: OculusTouchInputLeft.yButtonPressed(),
+    xPressed: OculusTouchInputLeft.xButtonPressed(),
+    yPressed: OculusTouchInputLeft.yButtonPressed(),
   };
 };
 

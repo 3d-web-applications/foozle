@@ -16,14 +16,12 @@ prototype.initialize = function () {
 
 OculusTouchButtonsLeft.forEach((element) => {
   prototype[element.fn] = function () {
-    //console.log(element.fn);
     return this.gamepad.buttons[element.id].pressed;
   };
 });
 
 OculusTouchAxes.forEach((element) => {
   prototype[element.fn] = function () {
-    //console.log(element.fn);
     return this.gamepad.axes[element.id];
   };
 });

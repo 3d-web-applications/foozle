@@ -30,7 +30,9 @@ module.exports = {
     'oculus-touch-input-left-example.js': './src/examples/oculus-touch-input-left-example.js',
     'oculus-touch-input-state-left-example.js': './src/examples/oculus-touch-input-state-left-example.js',
     'oculus-touch-input-right-example.js': './src/examples/oculus-touch-input-right-example.js',
-    'oculus-touch-input-state-right-example.js': './src/examples/oculus-touch-input-state-right-example.js'
+    'oculus-touch-input-state-right-example.js': './src/examples/oculus-touch-input-state-right-example.js',
+    'oculus-touch-pose-right-example.js': './src/examples/oculus-touch-pose-right-example.js',
+    'oculus-touch-pose-left-example.js': './src/examples/oculus-touch-pose-left-example.js'
   },
   output: {
     filename: '[name]',

@@ -27,3 +27,27 @@ OculusTouchAxes.forEach((element) => {
     return this.gamepad.axes[element.id];
   };
 });
+
+prototype.angularAcceleration = function () {
+  return this.gamepad.pose.angularAcceleration;
+};
+
+prototype.angularVelocity = function () {
+  return this.gamepad.pose.angularAcceleration;
+};
+
+prototype.linearAcceleration = function () {
+  return this.gamepad.pose.angularAcceleration;
+};
+
+prototype.linearVelocity = function () {
+  return this.gamepad.pose.angularAcceleration;
+};
+
+prototype.orientation = function () {
+  return this.gamepad.pose.angularAcceleration;
+};
+
+prototype.position2 = function () {
+  return this.gamepad.pose.angularAcceleration;
+};

@@ -10,13 +10,20 @@ module.exports = {
         to: './',
         force: true
       },
+      {
+        from: './src/examples/data/oculus-touch-left-mapping.json',
+        to: './',
+        force: true
+      },
     ]),
   ],
   context: __dirname,
   entry: {
     [`${folderName}.js`]: './main.js',
     'xbox360-input-example.js': './src/examples/xbox360-input-example.js',
-    'xbox360-input-state-example.js': './src/examples/xbox360-input-state-example.js'
+    'xbox360-input-state-example.js': './src/examples/xbox360-input-state-example.js',
+    'oculus-touch-input-left-example.js': './src/examples/oculus-touch-input-left-example.js',
+    'oculus-touch-input-state-left-example.js': './src/examples/oculus-touch-input-state-left-example.js'
   },
   output: {
     filename: '[name]',

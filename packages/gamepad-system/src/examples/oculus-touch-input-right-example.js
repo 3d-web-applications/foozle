@@ -32,6 +32,7 @@ prototype.update = function () {
     handPressed: OculusTouchInputRight.handTriggerPressed(),
     aPressed: OculusTouchInputRight.aButtonPressed(),
     bPressed: OculusTouchInputRight.bButtonPressed(),
+    thumbRest: OculusTouchInputRight.thumbRestButtonTouched(),
   };
 };
 

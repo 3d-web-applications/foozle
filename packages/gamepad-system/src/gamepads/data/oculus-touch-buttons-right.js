@@ -4,5 +4,5 @@ export const OculusTouchButtonsRight = [
   { id: 2, name: 'hand', fn: 'handTriggerPressed', },
   { id: 3, name: 'a', fn: 'aButtonPressed', },
   { id: 4, name: 'b', fn: 'bButtonPressed', },
-  /* id 6 - Reserved button is not supported */
+  { id: 5, name: 'thumbRest', fn: 'thumbRestButtonTouched', },
 ];

@@ -11,6 +11,8 @@ prototype.indexPressed = function () { console.log('indexPressed'); };
 prototype.indexReleased = function () { console.log('indexReleased'); };
 prototype.handPressed = function () { console.log('handPressed'); };
 prototype.handReleased = function () { console.log('handReleased'); };
+prototype.thumbRestTouchStart = function () { console.log('thumbRestTouchStart'); };
+prototype.thumbRestTouchEnd = function () { console.log('thumbRestTouchEnd'); };
 
 prototype.stickXChanged = function () { console.log('stickXChanged'); };
 prototype.stickYChanged = function () { console.log('stickYChanged'); };

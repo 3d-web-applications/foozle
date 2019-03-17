@@ -4,6 +4,7 @@
   { "name": "stick", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateRightExample", "cbPressed": "stickPressed", "cbReleased": "stickReleased" },
   { "name": "index", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateRightExample", "cbPressed": "indexPressed", "cbReleased": "indexReleased" },
   { "name": "hand", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateRightExample", "cbPressed": "handPressed", "cbReleased": "handReleased" },
+  { "name": "thumbRest", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateRightExample", "cbPressed": "thumbRestTouchStart", "cbReleased": "thumbRestTouchEnd" },
   { "name": "stickX", "defaultValue": 0, "entityId": 0, "scriptName": "OculusTouchInputStateRightExample", "cbChanged": "stickXChanged" },
   { "name": "stickY", "defaultValue": 0, "entityId": 0, "scriptName": "OculusTouchInputStateRightExample", "cbChanged": "stickYChanged" }
 ]

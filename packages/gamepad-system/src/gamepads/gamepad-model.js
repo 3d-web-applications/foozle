@@ -15,10 +15,10 @@ export const createGamepadModel = (buttons, axes, deadZone = 0.25) => {
         isPressed = value;
 
         if (isPressed) {
-          const fn = model[`${buttonName}Pressed`];
+          const fn = model[`${buttonName}Pressed`] || model[`${buttonName}TouchStart`];
           if (fn) fn();
         } else {
-          const fn = model[`${buttonName}Released`];
+          const fn = model[`${buttonName}Released`] || model[`${buttonName}TouchEnd`];
           if (fn) fn();
         }
       }

@@ -15,8 +15,10 @@ prototype.initialize = function () {
 };
 
 OculusTouchButtonsRight.forEach((element) => {
+  const propertyName = (element.fn.indexOf('Touched') > -1) ? 'touched' : 'pressed';
+
   prototype[element.fn] = function () {
-    return this.gamepad.buttons[element.id].pressed;
+    return this.gamepad.buttons[element.id][propertyName];
   };
 });
 

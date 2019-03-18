@@ -16,13 +16,9 @@ prototype.initialize = function () {
   const { OculusTouchInputLeft } = this._oculusTouchInputLeftEntity.script;
   this.enabled = OculusTouchInputLeft.enabled;
   OculusTouchInputLeft.on("state", (enabled) => { this.enabled = enabled; });
-  setInterval(() => {
-    const position = this._oculusTouchInputLeftEntity.script.OculusTouchInputLeft.position();
-    this._modelEntity.setLocalPosition(position[0], position[1], position[2]);
-  }, 1000);
 };
 
-/*prototype.update = function () {
+prototype.update = function () {
   const position = this._oculusTouchInputLeftEntity.script.OculusTouchInputLeft.position();
   this._modelEntity.setPosition(position[0], position[1], position[2]);
-};*/
+};

@@ -33,21 +33,21 @@ prototype.angularAcceleration = function () {
 };
 
 prototype.angularVelocity = function () {
-  return this.gamepad.pose.angularAcceleration;
+  return this.gamepad.pose.angularVelocity;
 };
 
 prototype.linearAcceleration = function () {
-  return this.gamepad.pose.angularAcceleration;
+  return this.gamepad.pose.linearAcceleration;
 };
 
 prototype.linearVelocity = function () {
-  return this.gamepad.pose.angularAcceleration;
+  return this.gamepad.pose.linearVelocity;
 };
 
 prototype.orientation = function () {
-  return this.gamepad.pose.angularAcceleration;
+  return this.gamepad.pose.orientation;
 };
 
-prototype.position2 = function () {
-  return this.gamepad.pose.angularAcceleration;
+prototype.position = function () {
+  return this.gamepad.pose.position;
 };

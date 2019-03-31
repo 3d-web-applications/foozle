@@ -43,18 +43,21 @@ prototype.initialize = function () {
   this.enabled = OculusTouchInputLeft.enabled;
   OculusTouchInputLeft.on("state", (enabled) => { this.enabled = enabled;} );
 
+  // TODO hier morgen weiter --> statt OculusTouchButtonsLeft und OculusTouchAxes vielleicht mapping verwenden!!!
   // used to hold last states of buttons and analog sticks
-  const model = createGamepadModel(OculusTouchButtonsLeft, OculusTouchAxes, this._deadZone);
+  //const model = createGamepadModel(OculusTouchButtonsLeft, OculusTouchAxes, this._deadZone);
 
   // get subset of observerable states
   const controls = [...OculusTouchButtonsLeft, ...OculusTouchAxes];
-  const hasEntry = (name) => controls.some((entry) => name === entry.name);
-  const subset = _mapping.resources.filter((element) => hasEntry(element.name));
+  const hasButton = (name) => OculusTouchButtonsLeft.some((entry) => name === entry.name);
+  const hasAxis = (name) => OculusTouchAxes.some((entry) => name === entry.name);
+  const buttons = _mapping.resources.filter((element) => hasButton(element.name));
+  const axes = _mapping.resources.filter((element) => hasAxis(element.name));
   
-console.log(model, controls, subset);
+  const model = createGamepadModel(buttons, axes, this._deadZone);
 
   // allow polling for a specific button/stick + bind handlers to process state changes
-  subset.forEach((element) => {
+  [...buttons, ...axes].forEach((element) => {
     const {
       name, defaultValue, cbPressed, cbReleased,
       cbChanged, entityId, scriptName,
@@ -67,12 +70,14 @@ console.log(model, controls, subset);
     if (cbChanged) model[cbChanged] = targetScript[cbChanged];
 
     const entry = controls.find((entry) => name === entry.name);
+    console.log(OculusTouchInputLeft[entry.fn]);
     this._array.push(() => { model[name] = OculusTouchInputLeft[entry.fn]() });
   });
 
-  console.log(this._array);
+  console.log('OculusTouchInputLeftState', this._array);
 };
 
 prototype.update = function (/* dt */) {
+  console.log('update');
   this._array.forEach( fn => fn() );
 };

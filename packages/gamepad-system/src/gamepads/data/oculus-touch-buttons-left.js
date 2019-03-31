@@ -1,14 +1,14 @@
 export const OculusTouchButtonsLeft = [
-  { id: 0, name: 'stick', fn: 'analogStickPressed', },
-  { id: 1, name: 'index', fn: 'indexTriggerPressed', },
-  { id: 2, name: 'hand', fn: 'handTriggerPressed', },
-  { id: 3, name: 'x', fn: 'xButtonPressed', },
-  { id: 4, name: 'y', fn: 'yButtonPressed', },
+  { id: 0, name: '_stickPressed', fn: 'analogStickPressed', },
+  { id: 1, name: '_indexPressed', fn: 'indexTriggerPressed', },
+  { id: 2, name: '_handPressed', fn: 'handTriggerPressed', },
+  { id: 3, name: '_xPressed', fn: 'xButtonPressed', },
+  { id: 4, name: '_yPressed', fn: 'yButtonPressed', },
   /* id: 5 pressed not suppported */
-  { id: 0, name: 'stick', fn: 'analogStickTouched', },
-  { id: 1, name: 'index', fn: 'indexTriggerTouched', },
-  { id: 2, name: 'hand', fn: 'handTriggerTouched', }, // not very responsive!
-  { id: 3, name: 'x', fn: 'xButtonTouched', },
-  { id: 4, name: 'y', fn: 'yButtonTouched', },
-  { id: 5, name: 'thumbRest', fn: 'thumbRestButtonTouched', },
+  { id: 0, name: '_stickTouched', fn: 'analogStickTouched', },
+  { id: 1, name: '_indexTouched', fn: 'indexTriggerTouched', },
+  { id: 2, name: '_handTouched', fn: 'handTriggerTouched', }, // not very responsive!
+  { id: 3, name: '_xTouched', fn: 'xButtonTouched', },
+  { id: 4, name: '_yTouched', fn: 'yButtonTouched', },
+  { id: 5, name: '_thumbRestTouched', fn: 'thumbRestButtonTouched', },
 ];

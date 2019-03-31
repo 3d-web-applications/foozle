@@ -1,10 +1,15 @@
 [
-  { "name": "x", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "xPressed", "cbReleased": "xReleased" },
-  { "name": "y", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "yPressed", "cbReleased": "yReleased" },
-  { "name": "stick", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "stickPressed", "cbReleased": "stickReleased" },
-  { "name": "index", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "indexPressed", "cbReleased": "indexReleased" },
-  { "name": "hand", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "handPressed", "cbReleased": "handReleased" },
-  { "name": "thumbRest", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "thumbRestTouchStart", "cbReleased": "thumbRestTouchEnd" },
-  { "name": "stickX", "defaultValue": 0, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbChanged": "stickXChanged" },
-  { "name": "stickY", "defaultValue": 0, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbChanged": "stickYChanged" }
+  { "name": "_xPressed", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "xPressStart", "cbReleased": "xPressEnd" },
+  { "name": "_yPressed", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "yPressStart", "cbReleased": "yPressEnd" },
+  { "name": "_stickPressed", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "stickPressStart", "cbReleased": "stickPressEnd" },
+  { "name": "_indexPressed", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "indexPressStart", "cbReleased": "indexPressEnd" },
+  { "name": "_handPressed", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "handPressStart", "cbReleased": "handPressEnd" },
+  { "name": "_stickX", "defaultValue": 0, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbChanged": "stickXChanged" },
+  { "name": "_stickY", "defaultValue": 0, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbChanged": "stickYChanged" },
+  { "name": "_xTouched", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "xTouchStart", "cbReleased": "xTouchEnd" },
+  { "name": "_yTouched", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "yTouchStart", "cbReleased": "yTouchEnd" },
+  { "name": "_stickTouched", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "stickTouchStart", "cbReleased": "stickTouchEnd" },
+  { "name": "_indexTouched", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "indexTouchStart", "cbReleased": "indexTouchEnd" },
+  { "name": "_handTouched", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "handTouchStart", "cbReleased": "handTouchEnd" },
+  { "name": "_thumbRestTouched", "defaultValue": false, "entityId": 0, "scriptName": "OculusTouchInputStateLeftExample", "cbPressed": "thumbRestTouchStart", "cbReleased": "thumbRestTouchEnd" }
 ]

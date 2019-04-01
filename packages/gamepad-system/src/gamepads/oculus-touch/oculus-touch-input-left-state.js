@@ -39,13 +39,11 @@ prototype.initialize = function () {
   this._array = [];
   const { OculusTouchInputLeft } = this.entity.script;
 
-  // mirror state of XBox360Input script and listen for changes
+  // Mirror state of OculusTouchInputLeft script and listen for changes.
+  // NOTE: this part is still extremely sensitive against the loading order!
+  // Make sure that this script is attached an entity right below the owner of 'GamepadManager'!
   this.enabled = OculusTouchInputLeft.enabled;
   OculusTouchInputLeft.on("state", (enabled) => { this.enabled = enabled;} );
-
-  // TODO hier morgen weiter --> statt OculusTouchButtonsLeft und OculusTouchAxes vielleicht mapping verwenden!!!
-  // used to hold last states of buttons and analog sticks
-  //const model = createGamepadModel(OculusTouchButtonsLeft, OculusTouchAxes, this._deadZone);
 
   // get subset of observerable states
   const controls = [...OculusTouchButtonsLeft, ...OculusTouchAxes];
@@ -70,14 +68,10 @@ prototype.initialize = function () {
     if (cbChanged) model[cbChanged] = targetScript[cbChanged];
 
     const entry = controls.find((entry) => name === entry.name);
-    console.log(OculusTouchInputLeft[entry.fn]);
     this._array.push(() => { model[name] = OculusTouchInputLeft[entry.fn]() });
   });
-
-  console.log('OculusTouchInputLeftState', this._array);
 };
 
 prototype.update = function (/* dt */) {
-  console.log('update');
   this._array.forEach( fn => fn() );
 };

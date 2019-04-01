@@ -39,20 +39,23 @@ prototype.initialize = function () {
   this._array = [];
   const { OculusTouchInputRight } = this.entity.script;
 
-  // mirror state of XBox360Input script and listen for changes
+  // Mirror state of OculusTouchInputLeft script and listen for changes.
+  // NOTE: this part is still extremely sensitive against the loading order!
+  // Make sure that this script is attached an entity right below the owner of 'GamepadManager'!
   this.enabled = OculusTouchInputRight.enabled;
   OculusTouchInputRight.on("state", (enabled) => { this.enabled = enabled;} );
 
-  // used to hold last states of buttons and analog sticks
-  const model = createGamepadModel(OculusTouchButtonsRight, OculusTouchAxes, this._deadZone);
-
   // get subset of observerable states
   const controls = [...OculusTouchButtonsRight, ...OculusTouchAxes];
-  const hasEntry = (name) => controls.some((entry) => name === entry.name);
-  const subset = _mapping.resources.filter((element) => hasEntry(element.name));
+  const hasButton = (name) => OculusTouchButtonsRight.some((entry) => name === entry.name);
+  const hasAxis = (name) => OculusTouchAxes.some((entry) => name === entry.name);
+  const buttons = _mapping.resources.filter((element) => hasButton(element.name));
+  const axes = _mapping.resources.filter((element) => hasAxis(element.name));
   
+  const model = createGamepadModel(buttons, axes, this._deadZone);
+
   // allow polling for a specific button/stick + bind handlers to process state changes
-  subset.forEach((element) => {
+  [...buttons, ...axes].forEach((element) => {
     const {
       name, defaultValue, cbPressed, cbReleased,
       cbChanged, entityId, scriptName,

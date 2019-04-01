@@ -40,8 +40,7 @@ prototype.initialize = function () {
   const { OculusTouchInputLeft } = this.entity.script;
 
   // Mirror state of OculusTouchInputLeft script and listen for changes.
-  // NOTE: this part is still extremely sensitive against the loading order!
-  // Make sure that this script is attached an entity right below the owner of 'GamepadManager'!
+  // NOTE: this is a very sensitive part. Make sure that there is only one OculusTouchInputLeft in the scene.
   this.enabled = OculusTouchInputLeft.enabled;
   OculusTouchInputLeft.on("state", (enabled) => { this.enabled = enabled;} );
 

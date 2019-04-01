@@ -44,15 +44,24 @@ prototype.initialize = function () {
   XBox360Input.on("state", (enabled) => { this.enabled = enabled;} );
 
   // used to hold last states of buttons and analog sticks
-  const model = createGamepadModel(XBox360Buttons, XBox360Axes, this._deadZone);
+  /*const model = createGamepadModel(XBox360Buttons, XBox360Axes, this._deadZone);
 
   // get subset of observerable states
   const controls = [...XBox360Buttons, ...XBox360Axes];
   const hasEntry = (name) => controls.some((entry) => name === entry.name);
   const subset = _mapping.resources.filter((element) => hasEntry(element.name));
+ */
+// get subset of observerable states
+  const controls = [...XBox360Buttons, ...XBox360Axes];
+  const hasButton = (name) => XBox360Buttons.some((entry) => name === entry.name);
+  const hasAxis = (name) => XBox360Axes.some((entry) => name === entry.name);
+  const buttons = _mapping.resources.filter((element) => hasButton(element.name));
+  const axes = _mapping.resources.filter((element) => hasAxis(element.name));
   
+  const model = createGamepadModel(buttons, axes, this._deadZone); 
   // allow polling for a specific button/stick + bind handlers to process state changes
-  subset.forEach((element) => {
+  //subset.forEach((element) => {
+  [...buttons, ...axes].forEach((element) => {
     const {
       name, defaultValue, cbPressed, cbReleased,
       cbChanged, entityId, scriptName,
